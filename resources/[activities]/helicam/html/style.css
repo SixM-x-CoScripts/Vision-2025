@@ -1,0 +1,364 @@
+/* General */
+
+#wrapper { 
+	display: none;
+}
+
+.text {
+	padding-top: 0.05vh;
+	padding-left: 0.5vh;
+	margin: 0;
+	color: rgb(255, 255, 255); /* rgb(50, 170, 35) <-- Green-ish */
+	font-family: 'Consolas', Helvetica, monospace;
+	text-shadow: 2px 0 2px hsla(0, 0%, 0%, 0.3), -2px 0 1px hsla(0, 0%, 0%, 0.3), 0 2px 1px hsla(0, 0%, 0%, 0.3), 0 -2px 1px hsla(0, 0%, 0%, 0.3), 1px 1px 1px hsla(0, 0%, 0%, 0.3), -1px -1px 1px hsla(0, 0%, 0%, 0.3), 1px -1px 1px hsla(0, 0%, 0%, 0.3), -1px 1px 1px hsla(0, 0%, 0%, 0.3), -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-size: 2.35vh; /* font-size: 1.55rem; */
+	font-weight: bold;
+}
+
+.no-left-padding {
+	padding-left: 0;
+}
+
+.float-right {
+	float: right;
+}
+
+.relative {
+	position: relative;
+}
+
+.inline {
+	display: inline-block;
+}
+
+.street {
+	display: none;
+	width: 100%;
+}
+
+.street-text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/*
+This is were you set the colour for the svg images (bearing, crosshair etc.) 
+Use this to "translate" the colour; https://codepen.io/sosuke/pen/Pjoqqp 
+The "Green-ish" mentioned with the text would for example be like this: invert(51%) sepia(9%) saturate(4544%) hue-rotate(68deg) brightness(102%) contrast(85%) drop-shadow(-1px -1px 0px #00000096) drop-shadow(1px -1px 0px #00000096) drop-shadow(1px 1px 0px #00000096) drop-shadow(-1px 1px 0px #00000096);
+Note: if you are going to change the colour, remember to also change it inside the bearing-directions.svg aswell (fill="white" -> fill="#32AA23" for "green-ish")
+*/
+.svg {
+	filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(51deg) brightness(106%) contrast(101%) drop-shadow(-1px -1px 0px #00000096) drop-shadow(1px -1px 0px #00000096) drop-shadow(1px 1px 0px #00000096) drop-shadow(-1px 1px 0px #00000096);
+}
+
+/* Helicopter Info (top left) */
+#helicopter-info {
+	display: inline-block;
+	margin-top: 2vh;
+	margin-left: 1vw;
+	margin-right: 0;
+	width: 35vw;
+	padding: 0;
+}
+
+#satellite-wrapper {
+	width: 4vh;
+}
+
+#satellite-icon {
+	margin-bottom: -0.35vh;
+	width: 100%;
+}
+
+#camera-label {
+	margin-left: 0;
+}
+
+.info-data {
+	display: inline-block;
+	vertical-align: top;
+}
+
+#hi-container-left {
+	display: inline-block;
+}
+
+#hi-latitude {
+	display: none;
+}
+
+#hi-sub-ll {
+	min-width: 8vw;
+	width: calc(100% - 3.15vw);
+}
+
+#hi-sub-lr {
+	float: right;
+	margin: 0;
+	margin-left: 0.15vw;
+	width: 3vw;
+}
+
+#hi-container-right {
+	display: inline-block;
+}
+
+#hi-longitude {
+	display: none;
+}
+
+#hi-sub-rl {
+	min-width: 8vw;
+	width: calc(100% - 2.25vw);
+}
+
+#hi-sub-rr {
+	float: right;
+	margin: 0;
+	margin-left: 0.15vw;
+	width: 2vw;
+}
+
+
+/* Target Info (top right) */
+#target-info {
+	float: right;
+	margin-top: 2vh;
+	margin-left: 0;
+	margin-right: 1vw;
+	max-width: 35vw;
+	height: 25vh;
+	padding: 0;
+}
+
+#mads-label {
+	color: rgba(255, 255, 255, 0);
+	opacity: 0.0;
+}
+
+#ta-street-wrapper {
+	float: right;
+	text-align: right;
+}
+
+#ta-container-wrapper {
+	float: right;
+}
+
+#ta-container-left {
+	float: left;
+	margin-right: 1vw;
+}
+
+#ta-latitude {
+	display: none;
+}
+
+#ta-sub-ll {
+	min-width: 8vw;
+	width: calc(100% - 3.15vw);
+}
+
+#ta-sub-lr {
+	float: right;
+	margin: 0;
+	margin-left: 0.15vw;
+	width: 3vw;
+}
+
+#ta-container-right {
+	float: right;
+}
+
+#ta-longitude {
+	display: none;
+}
+
+#ta-sub-rl {
+	min-width: 8vw;
+	width: calc(100% - 2.5vw);
+}
+
+#ta-sub-rr {
+	float: right;
+	margin: 0;
+	margin-left: 0.25vw;
+	width: 2.25vw;
+}
+
+
+/* bearing */
+#bearing-container {
+	width: 24.5vw;
+	position: absolute;
+	top: 2%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#bearing-img {
+	width: 30vh;
+}
+
+#bearing-directions {
+	margin-top: 0.25vh;
+	width: 30vh;
+}
+
+.bearing {
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+}
+
+#bearing-arrow-container {
+	width: 2vh;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#bearing-arrow {
+	width: 100%;
+	height: auto;
+}
+
+#bearing-letters {
+	margin: 0;
+}
+
+#timedate-container {
+	margin-top: 4vh;
+	margin-left: 1vw;
+	width: 12vw;
+	height: 6vh;
+}
+
+.centered {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#cross-wrapper {
+	position: relative;
+}
+
+#target-cross {
+	height: 13vh;
+}
+
+#target-cross-inner {
+	height: 3vh;
+}
+
+#lock-bar-container {
+	display: none;
+    position: absolute;
+	left: 50%;
+	top: 60%;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+	text-align: center;
+}
+
+#lock-bar-text {
+	margin-bottom: 0.5vh;
+}
+
+#lock-bar-wrapper {
+    background-color: rgba(0, 0, 0, 0.15);
+    width: 15vw;
+    height: 0.85vh;
+    border-radius: 0.25vh;
+	border: 2px solid hsla(0, 0%, 0%, 0.4);
+}
+
+#lock-bar-progress {
+    background-color: rgba(255, 255, 255, 0.95);
+    z-index: 2;
+    height: 100%;
+    width: 0%;
+}
+
+#relative-info {
+	position: absolute;
+	left: 50%;
+	bottom: 2%;
+	transform: translate(-50%, 0%);
+}
+
+#camera-pitch, #camera-heading  {
+	width: 2vw;
+}
+
+.camera-img {
+	position: relative;
+	z-index: 44;
+	width: 12.4vh;
+}
+
+.camera-line {
+	position: absolute;
+	margin-left: -6.65vh;;
+	margin-top: 1.4vh;
+	height: 4.8vh;
+	width: 0.8vh;
+	transform: rotate(90deg);
+	transform-origin: bottom;
+}
+
+#camera-info {
+	position: absolute;
+	bottom: 2%;
+	left: 0;
+	margin-left: 1vw;
+}
+
+#camera-info-stack {
+	margin-bottom: 2vh;
+}
+
+#lock-state {
+	margin-right: 0.8vh;
+}
+
+.lock-state-active {
+	color: rgb(200, 0, 0);
+}
+
+#zoom-arrow {
+	position: absolute;
+	width: 2vh;
+	z-index: 2;
+	margin-top: 0.3vh;
+	margin-left: 1vh;
+}
+
+#zoom-bar {
+	height: 2.25vh;
+}
+
+
+/* #north-infobox {
+	margin-top: 6vh;
+	margin-left: 2vh;
+	width: 10vw;
+	height: 12vh;
+	background-color: rgba(78, 36, 36, 0.288);
+}
+
+#compass-arrow{
+	transform-origin : center left;
+	background:#000;
+	width: 5vw;
+	height: 2vh;
+	 
+	position: absolute;
+} */
+
+
+
+

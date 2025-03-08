@@ -1,0 +1,491 @@
+RegisterCommand("gestionboutique", function()
+    if not p then return end
+    if p:getPermission() >= 5 then 
+        OpenCreaBoutique()
+    else
+        print("Permissions manquantes")
+    end
+end)
+
+local selectedCategory = 1;
+local selectedGlobalCategory = 1;
+local selectedItem = 1;
+local selectedVariation = 1;
+local selectedGender = 3; -- 1 = Homme, 2 = Femme, 3 = Unisex
+
+local index = 1;
+
+local main = RageUI.CreateMenu("Gestion Boutique", "Menu de gestion de la boutique")
+local categories = RageUI.CreateSubMenu(main, "Gestion Boutique", "Menu de gestion de la boutique")
+local category = RageUI.CreateSubMenu(categories, "Gestion Boutique", "Menu de gestion de la boutique")
+local items = RageUI.CreateSubMenu(category, "Gestion Boutique", "Menu de gestion de la boutique")
+local item = RageUI.CreateSubMenu(items, "Gestion Boutique", "Menu de gestion de la boutique")
+local customFields = RageUI.CreateSubMenu(item, "Gestion Boutique", "Menu de gestion de la boutique")
+local variations = RageUI.CreateSubMenu(item, "Gestion Boutique", "Menu de gestion de la boutique")
+local variation = RageUI.CreateSubMenu(variations, "Gestion Boutique", "Menu de gestion de la boutique")
+
+local function UpdateBoutique()
+    TriggerServerEvent("core:boutique:update", BoutiqueCatalogue)
+end
+
+function OpenCreaBoutique()
+    if open then
+        open = false
+        RageUI.CloseAll()
+        return
+    else
+        open = true
+        RageUI.Visible(main, true)
+        Citizen.CreateThread(function()
+            while open do
+                Wait(1)
+                RageUI.IsVisible(main, function()
+                    RageUI.List("Genre", {"Homme", "Femme", "Unisex"}, selectedGender, nil, {}, true, {
+                        onListChange = function(Index, Item)
+                            selectedGender = Index;
+                        end
+                    })
+
+                    for k,v in pairs(BoutiqueCatalogue) do
+                        RageUI.Button(CatalogueIndexes[k], nil, {RightLabel = "→→→"}, true, {
+                            onSelected = function()
+                                selectedGlobalCategory = k
+                            end
+                        }, categories)
+                    end
+
+                    RageUI.Button("~g~Sauvegarder", nil, {RightLabel = ""}, true, {
+                        onSelected = function()
+                            UpdateBoutique()
+                        end
+                    })
+                end)
+
+                RageUI.IsVisible(categories, function()
+                    for k,v in pairs(BoutiqueCatalogue[selectedGlobalCategory]) do
+                        RageUI.Button(v.title, nil, {RightLabel = "→→→"}, true, {
+                            onSelected = function()
+                                selectedCategory = k
+                            end
+                        }, category)
+                    end
+                    
+                    RageUI.Button("Ajouter une catégorie", nil, {RightLabel = "→→→"}, true, {
+                        onSelected = function()
+                            local newTitle = KeyboardImput("Nouveau titre", "")
+                            if not newTitle then return end
+
+                            local newSubtitle = KeyboardImput("Nouveau sous-titre", "")
+                            if not newSubtitle then return end
+
+                            local newImage = KeyboardImput("Nouvelle image", "")
+                            if not newImage then return end
+
+                            table.insert(BoutiqueCatalogue[selectedGlobalCategory], { title = newTitle, subtitle = newSubtitle, image = newImage, new = false, items = {} })
+                        end
+                    })
+                end)
+
+                RageUI.IsVisible(category, function()
+                    category.Title = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].title
+                    RageUI.Button("Modifier le titre", nil, {RightLabel = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].title}, true, {
+                        onSelected = function()
+                            local newTitle = KeyboardImput("Nouveau titre", "")
+                            if newTitle then
+                                BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].title = newTitle
+                            end
+                        end
+                    })
+                    RageUI.Button("Modifier le sous-titre", nil, {RightLabel = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].subtitle}, true, {
+                        onSelected = function()
+                            local newSubtitle = KeyboardImput("Nouveau sous-titre", "")
+                            if newSubtitle then
+                                BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].subtitle = newSubtitle
+                            end
+                        end
+                    })
+                    RageUI.Button("Modifier l'image", nil, {
+                        RightLabel = string.len(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].image) > 10 and string.sub(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].image, 1, 10) .. "..." or BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].image
+                    }, true, {
+                        onSelected = function()
+                            local newImage = KeyboardImput("Nouvelle image", "")
+                            if newImage then
+                                BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].image = newImage
+                            end
+                        end
+                    })
+                    RageUI.Checkbox("Bandeau nouveautés", nil, BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].new, {}, {
+                        onSelected = function(Checked)
+                            BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].new = Checked
+                        end
+                    })
+                    RageUI.Button("Voir les items", nil, {RightLabel = "→→→"}, true, {}, items)
+
+                    RageUI.Button("Supprimer la catégorie", nil, {RightLabel = ""}, true, {
+                        onSelected = function()
+                            table.remove(BoutiqueCatalogue[selectedGlobalCategory], selectedCategory)
+                            selectedCategory = 1
+                            RageUI.GoBack()
+                        end
+                    })
+                end)
+
+                RageUI.IsVisible(items, function()
+                    items.Title = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].title
+                    for k,v in pairs(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items) do
+
+                        -- filter using the local var selectedGender (1, 2, 3)
+                        if v.gender == selectedGender or selectedGender == 3 then
+                            RageUI.Button(v.name, nil, {RightLabel = "→→→"}, true, {
+                                onSelected = function()
+                                    selectedItem = k
+                                end
+                            }, item)
+                        end
+                    end
+                    RageUI.Button("Ajouter un item", nil, {RightLabel = "→→→"}, true, {
+                        onSelected = function()
+                            local newName = KeyboardImput("Nouveau nom", "")
+                            if not newName then return end
+
+                            local newImage = KeyboardImput("Nouvelle image", "")
+                            if not newImage then return end
+
+                            local newGender = KeyboardImput("Nouveau genre (1 = Homme, 2 = Femme, 3 = Unisex)", "")
+                            if not newGender then return end
+
+                            if newGender == "1" then
+                                newGender = 1
+                            elseif newGender == "2" then
+                                newGender = 2
+                            else
+                                newGender = 3
+                            end
+
+                            if selectedGlobalCategory == 4 then
+                                table.insert(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items, {
+                                    name = newName,
+                                    image = newImage,
+                                    gender = newGender,
+                                    customFields = {"Ecriture", "Logo"},
+                                    variations = {
+                                        {
+                                            icon = "",
+                                            color = "#AFC0B6",
+                                            color2 = "#FFFFFF",
+                                            label = "White"
+                                        },
+                                        {
+                                            icon = "",
+                                            label = "Blue",
+                                            color = "#051A66",
+                                            color2 = "#0362F1"
+                                        },
+                                        {
+                                            icon = "",
+                                            label = "Green",
+                                            color = "#0E551D",
+                                            color2 = "#00C92C",
+                                        },
+                                        {
+                                            icon = "",
+                                            label = "Red",
+                                            color = "#7A2929",
+                                            color2 = "#D70909"
+                                        },
+                                        {
+                                            icon = "",
+                                            label = "Black",
+                                            color = "#000000",
+                                            color2 = "#7D7D7D"
+                                        }
+                                    },
+                                    price = 2500
+                                })
+                            else
+                                table.insert(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items, { name = newName, image = newImage, customFields = {}, variations = {}, gender = newGender })
+                            end
+                        end
+                    })
+                end)
+
+                RageUI.IsVisible(item, function()
+                    item.Title = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].name
+                    RageUI.Button("Modifier le nom", nil, {RightLabel = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].name}, true, {
+                        onSelected = function()
+                            local newName = KeyboardImput("Nouveau nom", "")
+                            if newName then
+                                BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].name = newName
+                            end
+                        end
+                    })
+                    RageUI.Button("Modifier le Genre", nil, {RightLabel = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].gender or 3}, true, {
+                        onSelected = function()
+                            local newGender = KeyboardImput("Nouveau genre (1 = Homme, 2 = Femme, 3 = Unisex)", "")
+                            if not newGender then return end
+
+                            if newGender == "1" then
+                                newGender = 1
+                            elseif newGender == "2" then
+                                newGender = 2
+                            else
+                                newGender = 3
+                            end
+
+                            if newGender then
+                                print("newGender", newGender)
+                                BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].gender = newGender
+                            end
+                        end
+                    })
+                    RageUI.Button("Modifier l'image", nil, {
+                        RightLabel = string.len(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].image) > 10 and string.sub(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].image, 1, 10) .. "..." or BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].image
+                    }, true, {
+                        onSelected = function()
+                            local newImage = KeyboardImput("Nouvelle image", "")
+                            if newImage then
+                                BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].image = newImage
+                            end
+                        end
+                    })
+                    if BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].image2 then
+                        RageUI.Button("Modifier l'image 2", nil, {
+                            RightLabel = string.len(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].image2) > 10 and string.sub(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].image2, 1, 10) .. "..." or BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].image2
+                        }, true, {
+                            onSelected = function()
+                                local newImage = KeyboardImput("Nouvelle image", "")
+                                if newImage then
+                                    BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].image2 = newImage
+                                end
+                            end
+                        })
+                        RageUI.Button("Supprimer l'image 2", nil, { RightLabel = "" }, true, {
+                            onSelected = function()
+                                BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].image2 = nil
+                            end
+                        })
+                    else
+                        RageUI.Button("Ajouter une image 2", nil, { RightLabel = "" }, true, {
+                            onSelected = function()
+                                local newImage = KeyboardImput("Nouvelle image", "")
+                                if newImage then
+                                    BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].image2 = newImage
+                                end
+                            end
+                        })
+                    end
+
+                    if BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].price == nil then
+                        BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].price = 2500
+                    end
+                    RageUI.Button("Modifier le prix", nil, {RightLabel = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].price}, true, {
+                        onSelected = function()
+                            local newPrice = KeyboardImput("Nouveau prix", "")
+                            if newPrice then
+                                BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].price = newPrice
+                            end
+                        end
+                    })
+
+                    RageUI.Button("Voir les champs personnalisables", nil, {RightLabel = "→→→"}, true, {}, customFields)
+                    RageUI.Button("Voir les variations", nil, {RightLabel = "→→→"}, true, {}, variations)
+
+                    RageUI.Button("Supprimer l'item", nil, {RightLabel = ""}, true, {
+                        onSelected = function()
+                            table.remove(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items, selectedItem)
+                        end
+                    })
+                end)
+
+                RageUI.IsVisible(customFields, function()
+                    customFields.Title = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].name
+                    if #BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].customFields == 0 then
+                        BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].customFields = {}
+                    end
+                    for k,v in pairs(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].customFields) do
+                        RageUI.List(v, {"Modifier le nom", "Supprimer"}, index, nil, {}, true, {
+                            onListChange = function(Index, Item)
+                                index = Index;
+                            end,
+                            onSelected = function(Index, Item)
+                                if Index == 1 then
+                                    local newLabel = KeyboardImput("Nouveau label", "")
+                                    if newLabel then
+                                        BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].customFields[k] = newLabel
+                                    end
+                                elseif Index == 2 then
+                                    table.remove(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].customFields, k)
+                                end
+                            end
+                        })
+                    end
+                    RageUI.Button("Ajouter un champ personnalisable", nil, {RightLabel = "→→→"}, true, {
+                        onSelected = function()
+                            local newLabel = KeyboardImput("Nouveau label", "")
+                            if newLabel then
+                                table.insert(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].customFields, newLabel)
+                            end
+                        end
+                    })
+                end)
+
+                RageUI.IsVisible(variations, function()
+                    variations.Title = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].name
+                    for k,v in pairs(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations) do
+                        RageUI.Button(v.label, nil, {RightLabel = "→→→"}, true, {
+                            onSelected = function()
+                                selectedVariation = k
+                            end
+                        }, variation)
+                    end
+                    RageUI.Button("Ajouter une variation", nil, {RightLabel = "→→→"}, true, {
+                        onSelected = function()
+                            local newLabel = KeyboardImput("Nouveau label", "")
+                            if newLabel then
+                                local newColor = KeyboardImput("Nouvelle couleur", "")
+                                if newColor then
+                                    table.insert(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations, { label = newLabel, color = newColor })
+                                end
+                            end
+                        end
+                    })
+                end)
+
+                RageUI.IsVisible(variation, function()
+                    RageUI.Button("Modifier le nom", nil, {RightLabel = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].name}, true, {
+                        onSelected = function()
+                            local newName = KeyboardImput("Nouveau nom", "")
+                            if newName then
+                                BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].name = newName
+                            end
+                        end
+                    })
+
+                    RageUI.Button("Modifier le label", nil, {RightLabel = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].label}, true, {
+                        onSelected = function()
+                            local newLabel = KeyboardImput("Nouveau label", "")
+                            if newLabel then
+                                BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].label = newLabel
+                            end
+                        end
+                    })
+
+                    RageUI.Button("Modifier la couleur", nil, {RightLabel = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].color}, true, {
+                        onSelected = function()
+                            local newColor = KeyboardImput("Nouvelle couleur", "")
+                            if newColor then
+                                BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].color = newColor
+                            end
+                        end
+                    })
+
+                    if BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].color2 ~= nil then
+                        RageUI.Button("Modifier la couleur 2", nil, {RightLabel = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].color2}, true, {
+                            onSelected = function()
+                                local newColor = KeyboardImput("Nouvelle couleur", "")
+                                if newColor then
+                                    BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].color2 = newColor
+                                end
+                            end
+                        })
+                        
+                        RageUI.Button("Supprimer la couleur 2", nil, {RightLabel = ""}, true, {
+                            onSelected = function()
+                                BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].color2 = nil
+                            end
+                        })
+                    else
+                        RageUI.Button("Ajouter une couleur 2", nil, {RightLabel = ""}, true, {
+                            onSelected = function()
+                                local newColor = KeyboardImput("Nouvelle couleur", "")
+                                if newColor then
+                                    BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].color2 = newColor
+                                end
+                            end
+                        })
+                    end
+
+                    if BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].image ~= nil then
+                        RageUI.Button("Modifier l'image", nil, {
+                            RightLabel = string.len(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].image) > 10 and string.sub(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].image, 1, 10) .. "..." or BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].image
+                        }, true, {
+                            onSelected = function()
+                                local newImage = KeyboardImput("Nouvelle image", "")
+                                if newImage then
+                                    BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].image = newImage
+                                end
+                            end
+                        })
+                        RageUI.Button("Supprimer l'image", nil, {RightLabel = ""}, true, {
+                            onSelected = function()
+                                BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].image = nil
+                            end
+                        })
+                    else
+                        RageUI.Button("Ajouter une image", nil, {RightLabel = ""}, true, {
+                            onSelected = function()
+                                local newImage = KeyboardImput("Nouvelle image", "")
+                                if newImage then
+                                    BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].image = newImage
+                                end
+                            end
+                        })
+                    end
+
+                    if BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].icon == nil then
+                        BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].icon = ""
+                    end
+                    RageUI.Button("Modifier la preview 1", nil, {
+                        RightLabel = string.len(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].icon) > 10 and string.sub(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].icon, 1, 10) .. "..." or BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].icon
+                    }, true, {
+                        onSelected = function()
+                            local newImage = KeyboardImput("Nouvelle image", "")
+                            if newImage then
+                                BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].icon = newImage
+                            end
+                        end
+                    })
+
+                    if BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].image2 then
+                        if BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].icon2 == nil then
+                            BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].icon2 = ""
+                        end
+                        RageUI.Button("Modifier la preview 2", nil, {
+                            RightLabel = string.len(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].icon2) > 10 and string.sub(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].icon2, 1, 10) .. "..." or BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].icon2
+                        }, true, {
+                            onSelected = function()
+                                local newImage = KeyboardImput("Nouvelle image", "")
+                                if newImage then
+                                    BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation].icon2 = newImage
+                                end
+                            end
+                        })
+                    end
+
+                    if BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].customFields == nil then
+                        BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].customFields = {}
+                    end
+                    for k,v in pairs(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].customFields) do
+                        RageUI.Button("Valeur de " ..v, nil, {RightLabel = BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation][v]}, true, {
+                            onSelected = function()
+                                local newValue = KeyboardImput("Nouvelle valeur", "")
+                                if newValue then
+                                    BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations[selectedVariation][v] = newValue
+                                end
+                            end
+                        })
+                    end
+
+                    RageUI.Button("Supprimer la variation", nil, {RightLabel = ""}, true, {
+                        onSelected = function()
+                            table.remove(BoutiqueCatalogue[selectedGlobalCategory][selectedCategory].items[selectedItem].variations, selectedVariation)
+                            RageUI.GoBack()
+                            selectedVariation = 1
+                        end
+                    })
+
+                end)
+            end
+        end)
+    end
+end

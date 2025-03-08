@@ -1,0 +1,484 @@
+-- local token = nil
+
+-- TriggerEvent("core:RequestTokenAcces", "core", function(t)
+--     token = t
+-- end)
+
+-- local playerjob = player:getJob()
+
+-- local lspd = 
+-- {
+--     headerImage = 'https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Banners/LSPD.webp',
+--     headerIcon = 'https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Banners/icon.webp',
+--     headerIconName = 'CATALOGUE',
+--     callbackName = 'armoryTake',
+--     showTurnAroundButtons = false,
+--     elements = {
+--         {            
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/beanbag.webp",           
+--             name = "beanbag",
+--             label = "Beanbag",
+--         },
+--         {            
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Boite_cartouches.webp",
+--             name = "ammo30",
+--             label = "Boite de cartouches",
+--         },
+--         {            
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Bouclier_anti_emeute.webp",
+--             name = "shield",
+--             label = "Bouclier anti-émeute",
+--         },
+--         {            
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Extincteur.webp",
+--             name = "weapon_fireextinguisher",
+--             label = "Extincteur",
+--         },
+--         {           
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Fumigene.webp",
+--             name = "weapon_smokelspd",
+--             label = "Fumigene",
+--         },
+--         {            
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Fusee_detresse.webp",
+--             name = "weapon_flare",
+--             label = "Fusée de détresse",
+--         },
+--         {            
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Gaz_bz.webp",
+--             name = "weapon_bzgas",
+--             label = "GAZ BZ",
+--         },
+--         {           
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Herses.webp",
+--             name = "herse",
+--             label = "Herses",
+--         },
+--         {         
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Kevlar_leger.webp",
+--             name = "kevlarle",
+--             label = "Gilet de kevlar léger",
+--         },
+--         {           
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Kevlar_lourd.webp",
+--             name = "kevlarm",
+--             label = "Gilet de kevlar lourd",
+--         },
+--         {            
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Kevlar_moyen.webp",
+--             name = "kevlarlo",
+--             label = "Gilet de kevlar moyen",
+--         },
+--         {
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Lampe_torche.webp",
+--             name = "weapon_flashlight",
+--             label = "Lampe torche",
+--         },
+--         {            
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Matraque.webp",
+--             name = "weapon_nightstick",
+--             label = "Matraque",
+--         },
+--         {            
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Radio.webp",
+--             name = "radio",
+--             label = "Radio",
+--         },
+--         {            
+--             price = 0,
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Tazer.webp",
+--             name = "weapon_stungun_mp",
+--             label = "weapon_stungun_mp",
+--         },
+--     }
+-- }
+
+-- local sams = 
+-- {
+--     headerImage = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Banners/SAMS.webp",
+--     headerIcon = 'https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Banners/icon.webp',
+--     headerIconName = 'CATALOGUE',
+--     callbackName = 'armoryTake',
+--     showTurnAroundButtons = false,
+--     elements = {
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/bandages.webp",
+--             price = 0,
+--             name = "band",
+--             label = "Bandages",
+--         },    
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Extincteur.webp",
+--             price = 0,
+--             name = "weapon_fireextinguisher",
+--             label = "Extincteur",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Jumelles.webp",
+--             price = 0,
+--             name = "jumelle",
+--             label = "Jumelles",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Lampe_torche.webp",
+--             price = 0,
+--             name = "weapon_flashlight",
+--             label = "Lampe torche",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/medicament.webp",
+--             price = 0,
+--             name = "medic",
+--             label = "Médicament",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/medikit.webp",
+--             price = 0,
+--             name = "medikit",
+--             label = "Medikit",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Pansement.webp",
+--             price = 0,
+--             name = "pad",
+--             label = "Pansement",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/parachute.webp",
+--             price = 0,
+--             name = "gadget_parachute",
+--             label = "Parachute",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Radio.webp",
+--             price = 0,
+--             name = "radio",
+--             label = "Radio",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Recycleur.webp",
+--             price = 0,
+--             name = "recycleur",
+--             label = "Recycleur",
+--         },
+--     }
+-- }
+
+-- local g6 = 
+-- {
+--     headerImage = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Banners/G6.webp",
+--     headerIcon = 'https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Banners/icon.webp',
+--     headerIconName = 'CATALOGUE',
+--     callbackName = 'armoryTake',
+--     showTurnAroundButtons = false,
+--     elements = {
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Boite_cartouches.webp",
+--             price = 0,
+--             name = "ammo30",
+--             label = "Boite de cartouches",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Extincteur.webp",
+--             price = 0,
+--             name = "weapon_fireextinguisher",
+--             label = "Extincteur",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Gaz_bz.webp",
+--             price = 0,
+--             name = "weapon_bzgas",
+--             label = "GAZ BZ",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Kevlar_leger.webp",
+--             price = 0,
+--             name = "kevlarle",
+--             label = "Gilet de kevlar léger",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Kevlar_lourd.webp",
+--             price = 0,
+--             name = "kevlarlo",
+--             label = "Gilet de kevlar lourd",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Kevlar_moyen.webp",
+--             price = 0,
+--             name = "kevlarm",
+--             label = "Gilet de kevlar moyen",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Lampe_torche.webp",
+--             price = 0,
+--             name = "weapon_flashlight",
+--             label = "Lampe torche",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Matraque.webp",
+--             price = 0,
+--             name = "weapon_nightstick",
+--             label = "Matraque",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Radio.webp",
+--             price = 0,
+--             name = "radio",
+--             label = "Radio",
+--         },
+--     }
+-- }
+
+-- local lsfd = 
+-- {
+--     headerImage = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Banners/LSFD.webp",
+--     headerIcon = 'https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Banners/icon.webp',
+--     headerIconName = 'CATALOGUE',
+--     callbackName = 'armoryTake',
+--     showTurnAroundButtons = false,
+--     elements = {
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/bandages.webp",
+--             price = 0,
+--             name = "band",
+--             label = "Bandages",
+--         },    
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Extincteur.webp",
+--             price = 0,
+--             name = "weapon_fireextinguisher",
+--             label = "Extincteur",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Jumelles.webp",
+--             price = 0,
+--             name = "jumelle",
+--             label = "Jumelles",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Lampe_torche.webp",
+--             price = 0,
+--             name = "weapon_flashlight",
+--             label = "Lampe torche",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/medicament.webp",
+--             price = 0,
+--             name = "medic",
+--             label = "Médicament",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/medikit.webp",
+--             price = 0,
+--             name = "medikit",
+--             label = "Medikit",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Pansement.webp",
+--             price = 0,
+--             name = "pad",
+--             label = "Pansement",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/parachute.webp",
+--             price = 0,
+--             name = "gadget_parachute",
+--             label = "Parachute",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Radio.webp",
+--             price = 0,
+--             name = "radio",
+--             label = "Radio",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Recycleur.webp",
+--             price = 0,
+--             name = "recycleur",
+--             label = "Recycleur",
+--         },
+--     }
+-- }
+
+
+-- local usss = 
+-- {
+--     headerImage = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Banners/USSS.webp",
+--     headerIcon = 'https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Banners/icon.webp',
+--     headerIconName = 'CATALOGUE',
+--     callbackName = 'armoryTake',
+--     showTurnAroundButtons = false,
+--     elemnts = {
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Boite_cartouches.webp",
+--             price = 0,
+--             name = "ammo30",
+--             label = "Boite de cartouches",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Extincteur.webp",
+--             price = 0,
+--             name = "weapon_fireextinguisher",
+--             label = "Extincteur",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Fumigene.webp",
+--             price = 0,
+--             name = "weapon_smokelspd",
+--             label = "Fumigene",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Gaz_bz.webp",
+--             price = 0,
+--             name = "weapon_bzgas",
+--             label = "GAZ BZ",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Herses.webp",
+--             price = 0,
+--             name = "herse",
+--             label = "Herses",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Insignes_Usss.webp",
+--             price = 0,
+--             name = "insigneKevUsss",
+--             label = "Insignes USSS",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Kevlar_leger.webp",
+--             price = 0,
+--             name = "kevlarle",
+--             label = "Gilet de kevlar léger",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Kevlar_lourd.webp",
+--             price = 0,
+--             name = "kevlarlo",
+--             label = "Gilet de kevlar lourd",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Kevlar_moyen.webp",
+--             price = 0,
+--             name = "kevlarm",
+--             label = "Gilet de kevlar moyen",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Lampe_torche.webp",
+--             price = 0,
+--             name = "weapon_flashlight",
+--             label = "Lampe torche",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Matraque.webp",
+--             price = 0,
+--             name = "weapon_nightstick",
+--             label = "Matraque",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/parachute.webp",
+--             price = 0,
+--             name = "gadget_parachute",
+--             label = "Parachute",
+--         },
+--         {
+--             image = "https://cdn.sacul.cloud/v2/vision-cdn/Armurerie/Items/Radio.webp",
+--             price = 0,
+--             name = "radio",
+--             label = "Radio",
+--         },
+--     }
+-- }
+
+-- local armory = {
+--     {job = "lspd", ped = nil, pos = vector4(-1106.4460449219, -825.66052246094, 14.206969261169, 0.0), ui = lspd},
+--     {job = "sams", ped = "s_m_m_paramedic_01", pos = vector4(-1829.501953125, -379.97811889648, 49.406421661377, 45.6), ui = sams},
+--     {job = "lssd", ped = nil, pos = vector4(1818.0302734375, 3665.5268554688, 30.314868927002, 0.0), ui = lspd},
+--     {job = "lssd", ped = nil, pos = vector4(1818.0302734375, 3665.5268554688, 30.314868927002, 0.0), ui = lspd},
+--     {job = "lsfd", ped = nil, pos = vector4(-444.18542480469, 6013.7431640625, 37.008377075195, 0.0), ui = lsfd},
+--     {job = "lsfd", ped = nil, pos = vector4(-363.91668701172, 6112.1845703125, 31.4391746521, 0.0), ui = lsfd},
+--     {job = "g6", ped = nil, pos = vector4(2525.1440429688, -298.29415893555,-58.722972869873, 0.0), ui = g6},
+--     {job = "usss", ped = nil, pos = vector4(23.639324188232, -937.98181152344, 14.902667999268, 0.0), ui = usss},
+-- }
+
+-- function openArmory(v)
+--     FreezeEntityPosition(PlayerPedId(), true)
+--     SendNuiMessage(json.encode({
+--         type = 'openWebview',
+--         name = 'MenuCatalogueAchat',
+--         data = v.ui
+--     }));
+-- end
+
+-- RegisterNUICallback("armoryTake", function(data, cb)
+--     TriggerSecurGiveEvent("core:addItemToInventory", token, data.name, 1, {})
+--     -- ShowNotification("Vous venez d'acheter un(e) "..data.name)
+
+--     -- New notif
+--     exports['vNotif']:createNotification({
+--         type = 'DOLLAR',
+--         -- duration = 5, -- In seconds, default:  4
+--         content = "Vous venez de récupérer ~s un(e) "..data.name
+--     })
+
+-- end)
+
+-- RegisterNUICallback("focusOut", function (data, cb)
+--     TriggerScreenblurFadeOut(0.5)
+--     openRadarProperly()
+--     RenderScriptCams(false, false, 0, 1, 0)
+--     DestroyCam(cam, false)
+--     FreezeEntityPosition(PlayerPedId(), false)
+-- end)
+
+-- local peds = {}
+-- CreateThread(function()
+--     while true do
+--         for k, v in pairs(armory) do
+--             print(playerjob)
+--             if playerjob == v.job then
+--                 if v.ped ~= nil then
+--                     while zone == nil do Wait(1) end
+--                     peds[k] = entity:CreatePedLocal(v.ped, vector3(v.pos.x, v.pos.y, v.pos.z - 1), v.pos.w)
+--                     peds[k]:setFreeze(true)
+--                     SetEntityInvincible(peds[k].id, true)
+--                     SetEntityAsMissionEntity(peds[k].id, 0, 0)
+--                     SetBlockingOfNonTemporaryEvents(peds[k].id, true)
+--                 end
+--                 zone.addZone(
+--                     v.job .. "_armory_" .. k,
+--                     v.pos,
+--                     "Appuyer sur ~INPUT_CONTEXT~ pour ouvrir les équipements",
+--                     function()
+--                         openArmory(v)
+--                     end,
+--                     true, -- Avoir un marker ou non
+--                     -1, -- Id / type du marker
+--                     0.6, -- La taille
+--                     { 0, 0, 0 }, -- RGB
+--                     0, -- Alpha
+--                     2.5 -- Interact dist
+--                 )
+--             -- elseif DoesEntityExist(peds[k].id) then
+--             --     DeletePed(peds[k].id)
+--             --     zone.removeZone(v.job .. "_armory_" .. k)
+--             -- end
+--             end
+--         end
+--         Wait(5000)
+--     end
+-- end)

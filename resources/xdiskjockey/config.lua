@@ -1,0 +1,1680 @@
+Config = {}
+
+Config.Debug = false
+
+-- 0 standalone
+-- 1 ESX
+-- 2 QBCore
+Config.FrameWork = 0
+
+Config.GetQBCoreObject = function()
+    -- Choose your objectType or made here your own.
+    local objectType = 1
+
+    if objectType == 1 then
+        return exports['qb-core']:GetCoreObject()
+    end
+
+    if objectType == 2 then
+        return exports['qb-core']:GetSharedObject()
+    end
+
+    if objectType == 3 then
+        local QBCore = nil
+        local breakPoint = 0
+        while not QBCore do
+            Wait(100)
+            TriggerEvent("QBCore:GetObject", function(obj) QBCore = obj end)
+
+            breakPoint = breakPoint + 1
+            if breakPoint == 25 then
+                print(string.format("^1[%s]^7 Could not load the sharedobject, are you sure it is called ^1˙QBCore:GetObject˙^7?", GetCurrentResourceName()))
+                break
+            end
+        end
+
+        return QBCore
+    end
+end
+
+-- Key to open menu
+Config.KeyToOpen = "E"
+
+-- Locale for script
+Config.Locale = "fr"
+
+-- ESX shared object (is no needed, its prebuilded only)
+Config.ESX = 'esx:getSharedObject'
+
+-- how much volume will adjust each +/- button
+Config.VolumeAdjust = 0.01
+
+-- Do we want cached music for dj mixes?
+Config.AllowCachedMusic = true
+
+-- DJ mixer list
+Config.MixerList = {
+    vanila = {
+        mixer = {
+            {
+                pos = vector3(120.72, -1281.12, 29.48),
+                distance = 5,
+            },
+            jobs = {"unicorn"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(120.72, -1281.12, 29.48),
+                distance = 30,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.5,
+    },
+    -----------------------------
+
+    bahamas = {
+        mixer = {
+            {
+                pos = vector3(-1391.0260009766, -605.35906982422, 30.51838684082),
+                distance = 5,
+            },
+            jobs = {"bahamas"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1391.0260009766, -605.35906982422, 30.51838684082),
+                distance = 35,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.5,
+    },
+
+
+        -- EVENT --
+
+        bahamas = {
+            mixer = {
+                {
+                    pos = vector3(-322.28790283203, -1966.3005371094, 21.965982437134),
+                    distance = 5,
+                },
+                jobs = {"bahamas"} -- if left nil everyone will be able to open it
+            },
+            speaker = {
+                {
+                    pos = vector3(-322.28790283203, -1966.3005371094, 21.965982437134),
+                    distance = 35,
+                },
+            },
+            -- max value is 1.0
+            -- 1.0 = 100% volume
+            defaultVolume = 0.5,
+        },
+
+        emperium1 = {
+            mixer = {
+                {
+                    pos = vector3(-459.96771240234, 150.68272399902, 79.116172790527),
+                    distance = 5,
+                },
+                jobs = {"emperium"} -- if left nil everyone will be able to open it
+            },
+            speaker = {
+                {
+                    pos = vector3(-459.96771240234, 150.68272399902, 79.116172790527),
+                    distance = 35,
+                },
+            },
+            -- max value is 1.0
+            -- 1.0 = 100% volume
+            defaultVolume = 0.5,
+        },
+
+        emperium2 = {
+            mixer = {
+                {
+                    pos = vector3(-480.11480712891, 161.83659362793, 79.245811462402),
+                    distance = 5,
+                },
+                jobs = {"emperium"} -- if left nil everyone will be able to open it
+            },
+            speaker = {
+                {
+                    pos = vector3(-480.11480712891, 161.83659362793, 79.245811462402),
+                    distance = 35,
+                },
+            },
+            -- max value is 1.0
+            -- 1.0 = 100% volume
+            defaultVolume = 0.5,
+        },
+
+        emperium3 = {
+            mixer = {
+                {
+                    pos = vector3(-492.29626464844, 163.72412109375, 79.246803283691),
+                    distance = 5,
+                },
+                jobs = {"emperium"} -- if left nil everyone will be able to open it
+            },
+            speaker = {
+                {
+                    pos = vector3(-492.29626464844, 163.72412109375, 79.246803283691),
+                    distance = 35,
+                },
+            },
+            -- max value is 1.0
+            -- 1.0 = 100% volume
+            defaultVolume = 0.5,
+        },
+
+        
+        emperium4 = {
+            mixer = {
+                {
+                    pos = vector3(193.97988891602, -27.481281280518, 73.865081787109),
+                    distance = 5,
+                },
+                jobs = {"emperium"} -- if left nil everyone will be able to open it
+            },
+            speaker = {
+                {
+                    pos = vector3(193.97988891602, -27.481281280518, 73.865081787109),
+                    distance = 35,
+                },
+            },
+            -- max value is 1.0
+            -- 1.0 = 100% volume
+            defaultVolume = 0.5,
+        },
+
+    --PIZZERIA 
+
+    pizzeria = {
+        mixer = {
+            {
+                pos = vector3(810.60858154297, -764.49450683594, 25.780849456787),
+                distance = 5,
+            },
+            jobs = {"pizzeria"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(810.60858154297, -764.49450683594, 25.780849456787),
+                distance = 35,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.5,
+    },
+
+    barber = {
+        mixer = {
+            {
+                pos = vector3(141.22247314453, -1703.6663818359, 28.291854858398),
+                distance = 2,
+            },
+            jobs = {"barber"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(141.22247314453, -1703.6663818359, 28.291854858398),
+                distance = 55,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+
+
+    uwu = {
+        mixer = {
+            {
+                pos = vector3(-592.39624023438, -1049.7312011719, 22.344175338745),
+                distance = 5,
+            },
+            jobs = {"uwu"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-592.39624023438, -1049.7312011719, 22.344175338745),
+                distance = 25,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.5,
+    },
+
+    comrades = {
+        mixer = {
+            {
+                pos = vector3(-1589.0395507813, -998.47137451172, 13.075214385986),
+                distance = 5,
+            },
+            -- jobs = {"job","other job"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1589.0395507813, -998.47137451172, 13.075214385986),
+                distance = 25,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.5,
+    },
+    -----------------------------------
+    -- Tattoo
+    Tattoo = {
+        mixer = {
+            {
+                pos = vector3(322.90707397461, 185.64898681641, 102.58811187744),
+                distance = 5,
+            },
+            jobs = {"tattooSud"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(322.90707397461, 185.64898681641, 102.58811187744),
+                distance = 60,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.5,
+    },
+    -- Rex diner
+    RexDiner = {
+        mixer = {
+            {
+                pos = vector3(2538.2778320312, 2590.4365234375, 37.497489929199),
+                distance = 5,
+            },
+            jobs = {"burgershot"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(2538.2778320312, 2590.4365234375, 37.497489929199),
+                distance = 60,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.5,
+    },
+    -----------------------------------
+    -- ps
+    PS = {
+        mixer = {
+            {
+                pos = vector3(-329.85729980469, -94.458274841309, 47.047378540039),
+                distance = 5,
+            },
+            jobs = {"pawnshop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-313.37432861328, -100.70644378662, 47.047382354736),
+                distance = 70,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.25,
+    },
+    -- mirror
+    mirror = {
+        mixer = {
+            {
+                pos = vector3(1113.7874755859, -648.5712890625, 56.815990447998),
+                distance = 5,
+            },
+            jobs = {"mirror"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(1113.7874755859, -648.5712890625, 56.815990447998),
+                distance = 40,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.25,
+    },
+    
+    -- hornys
+    hornys = {
+        mixer = {
+            {
+                pos = vector3(1251.3173828125, -361.54278564453, 68.084907531738),
+                distance = 5,
+            },
+            jobs = {"hornys"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(1251.3173828125, -361.54278564453, 68.084907531738),
+                distance = 40,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.25,
+    },
+
+        -- Hayes
+        hayes = {
+            mixer = {
+                {
+                    pos = vector3(-1422.552734375, -456.09658813477, 34.909706115723),
+                    distance = 5,
+                },
+                jobs = {"hayes"} -- if left nil everyone will be able to open it
+            },
+            speaker = {
+                {
+                    pos = vector3(-1422.552734375, -456.09658813477, 34.909706115723),
+                    distance = 25,
+                },
+            },
+            -- max value is 1.0
+            -- 1.0 = 100% volume
+            defaultVolume = 0.25,
+        },
+    
+        -- St Fiacre
+        stfiacre = {
+            mixer = {
+                {
+                    pos = vector3(1134.8323974609, -1558.8482666016, 34.032711029053),
+                    distance = 5,
+                },
+                jobs = {"ems"} -- if left nil everyone will be able to open it
+            },
+            speaker = {
+                {
+                    pos = vector3(1134.8323974609, -1558.8482666016, 34.032711029053),
+                    distance = 50,
+                },
+            },
+            -- max value is 1.0
+            -- 1.0 = 100% volume
+            defaultVolume = 0.25,
+        },
+    
+
+    -- ltd
+    ltdsud = {
+        mixer = {
+            {
+                pos = vector3(-40.7681, -1751.735312, 28.42418),
+                distance = 5,
+            },
+            jobs = {"ltdsud"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-40.7681, -1751.735312, 28.42418),
+                distance = 40,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.25,
+    },
+    -- church
+    church = {
+        mixer = {
+            {
+                pos = vector3(-770.14508056641, -17.590604782104, 44.964248657227),
+                distance = 5,
+            },
+            --jobs = {"lscustoms"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-770.14508056641, -17.590604782104, 44.964248657227),
+                distance = 70,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+    lspd = {
+        mixer = {
+            {
+                pos = vector3(-1077.712890625, -816.07409667969, 18.355707168579),
+                distance = 5,
+            },
+            jobs = {"lspd"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1077.712890625, -816.07409667969, 18.355707168579),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+    --[[ lssd = {
+        mixer = {
+            {
+                pos = vector3(2823.7614746094, 4734.970703125, 48.627361297607),
+                distance = 5,
+            },
+            jobs = {"lssd"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(2823.7614746094, 4734.970703125, 47.627361297607),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    }, ]]
+
+    lssdboolingbroke = {
+        mixer = {
+            {
+                pos = vector3(1772.6844482422, 2492.1865234375, 48.689266204834),
+                distance = 5,
+            },
+            jobs = {"lssd"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(1772.6844482422, 2492.1865234375, 48.689266204834),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+    lssd = {
+        mixer = {
+            {
+                pos = vector3(1814.1538085938, 3684.5141601563, 34.042930603027),
+                distance = 5,
+            },
+            jobs = {"lssd"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(1814.1538085938, 3684.5141601563, 34.042930603027),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+    bayview = {
+        mixer = {
+            {
+                pos = vector3(-693.0439453125, 5796.9067382813, 17.331008911133),
+                distance = 5,
+            },
+            jobs = {"bayviewLodge"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-687.66442871094, 5801.994140625, 19.330997467041),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+    studio = {
+        mixer = {
+            {
+                pos = vector3(-996.67504882813, -68.201499938965, -100.00312805176),
+                distance = 5,
+            },
+            --jobs = {"lssd"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-988.61450195313, -72.30460357666, -100.00302886963),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+    -- Bean Machine
+    bean = {
+        mixer = {
+            {
+                pos = vector3(-631.99359130859, 232.87229919434, 81.881553649902),
+                distance = 5,
+            },
+            jobs = {"bean"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-625.50189208984, 235.45640563965, 80.881469726563),
+                distance = 30,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+    -- Studio Weazel
+    studiowz = {
+        mixer = {
+            {
+                pos = vector3(-244.64469909668, 209.94532775879, 92.086524963379),
+                distance = 5,
+            },
+            jobs = {"weazelnews"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-258.43176269531, 220.25950622559, 90.974891662598),
+                distance = 30,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+    blackwood = {
+        mixer = {
+            {
+                pos = vector3(-302.1982421875, 6271.7778320313, 31.526863098145),
+                distance = 5,
+            },
+            jobs = {"blackwood"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-305.9313659668, 6261.896484375, 35.525690078735),
+                distance = 30,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+    YellowJack = {
+        mixer = {
+            {
+                pos = vector3(1987.4333496094, 3051.0603027344, 46.215137481689),
+                distance = 5,
+            },
+            jobs = {"yellowJack"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(1987.4333496094, 3051.0603027344, 46.215137481689),
+                distance = 30,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+    --[[ mbaconcert = {
+        mixer = {
+            {
+                pos = vector3(-306.71252441406, -1981.8137207031, 22.204040527344),
+                distance = 5,
+            },
+            --jobs = {""} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-320.55502319336, -1963.6822509766, 24.073299407959),
+                distance = 75,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.75,
+    }, ]]
+    bennys = {
+        mixer = {
+            {
+                pos = vector3(-192.3697052002, -1337.7219238281, 30.300472259521),
+                distance = 5,
+            },
+            jobs = {"bennys"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-192.3697052002, -1337.7219238281, 30.300472259521),
+                distance = 75,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    }, 
+    cayo = {
+        mixer = {
+            {
+                pos = vector3(4893.4326171875, -4903.8134765625, 3.4866738319397),
+                distance = 5,
+            },
+            --jobs = {""} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(4890.416015625, -4924.9921875, 5.3672661781311),
+                distance = 70,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    }, 
+    SOA = {
+        mixer = {
+            {
+                pos = vector3(1697.5131835938, 4782.0161132813, 41.989517211914),
+                distance = 5,
+            },
+            --jobs = {""} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(1712.1885986328, 4785.5327148438, 43.989505767822),
+                distance = 40,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    }, 
+    
+    Families = {
+        mixer = {
+            {
+                pos = vector3(-104.0230255127, -1446.3885498047, 36.78987121582),
+                distance = 5,
+            },
+            --jobs = {""} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-108.79148864746, -1444.4268798828, 39.789825439453),
+                distance = 35,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+    DJDavis = {
+        mixer = {
+            {
+                pos = vector3(152.55104064941, -1718.5050048828, 39.282287597656),
+                distance = 5,
+            },
+            --jobs = {""} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(145.89479064941, -1712.9918212891, 42.268390655518),
+                distance = 40,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    }, 
+    DJ69Music1 = {
+        mixer = {
+            {
+                pos = vector3(-1003.4327392578, -280.63305664063, 44.796340942383),
+                distance = 5,
+            },
+            --jobs = {""} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1001.7305908203, -281.57177734375, 45.797489166261),
+                distance = 10,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+    DJ69Music2 = {
+        mixer = {
+            {
+                pos = vector3(-1010.2451171875, -288.95864868164, 44.8034324646),
+                distance = 5,
+            },
+            --jobs = {""} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1008.4756469727, -292.4755859375, 45.797481536865),
+                distance = 10,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+    DJ69Music3 = {
+        mixer = {
+            {
+                pos = vector3(-1004.5264892578, -250.55442810059, 39.469093322754),
+                distance = 5,
+            },
+            --jobs = {""} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1002.6013793945, -257.83212280273, 40.03950881958),
+                distance = 15,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+
+    BurgerShot = {
+        mixer = {
+            {
+                pos = vector3(1591.1092529297, 3756.2788085938, 33.4644326171875),
+                distance = 5,
+            },
+            jobs = {"burgershot"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(1591.1092529297, 3756.2788085938, 33.4644326171875),
+                distance = 45,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+
+    LSMotors = {
+        mixer = {
+            {
+                pos = vector3(162.47994995117, -1099.8345947266, 29.194459915161),
+                distance = 2,
+            },
+            --jobs = {""} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(161.7000579834, -1107.3693847656, 30.994255065918),
+                distance = 45,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+
+    AngelOfDeath = {
+        mixer = {
+            {
+                pos = vector3(245.29330444336, 6620.6357421875, 28.710195541382),
+                distance = 2,
+            },
+            --jobs = {""} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(245.29330444336, 6620.6357421875, 28.710195541382),
+                distance = 30,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+
+    Weazel = {
+        mixer = {
+            {
+                pos = vector3(-566.70385742188, -931.24365234375, 22.815696716309),
+                distance = 2,
+            },
+            jobs = {"weazelnews"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-566.70385742188, -931.24365234375, 22.815696716309),
+                distance = 8,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+
+    Weazel2 = {
+        mixer = {
+            {
+                pos = vector3(-579.94036865234, -935.68975830078, 32.338687896729 ),
+                distance = 2,
+            },
+            jobs = {"weazelnews"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-579.94036865234, -935.68975830078, 32.338687896729 ),
+                distance = 20,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+
+    Pearl = {
+        mixer = {
+            {
+                pos = vector3(-1839.4113769531, -1189.0805664063, 13.309233665466),
+                distance = 2,
+            },
+            jobs = {"pearl"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1839.4113769531, -1189.0805664063, 13.309233665466),
+                distance = 45,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+
+    NewUnicorn = {
+        mixer = {
+            {
+                pos = vector3(92.233558654785, -1273.0513916016, 20.111211776733),
+                distance = 2,
+            },
+            jobs = {"unicorn"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(92.233558654785, -1273.0513916016, 20.111211776733),
+                distance = 55,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+
+    barber2 = {
+        mixer = {
+            {
+                pos = vector3(-1277.2424316406, -1116.0952148438, 5.9903535842896),
+                distance = 2,
+            },
+            jobs = {"barber2"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1277.2424316406, -1116.0952148438, 5.9903535842896),
+                distance = 55,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45,
+    },
+
+    angeltattoo = {
+        mixer = {
+            {
+                pos = vector3(-296.6692199707, 6200.93359375, 30.509389877319),
+                distance = 2,
+            },
+            jobs = {"tattooNord"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-296.6692199707, 6200.93359375, 30.509389877319),
+                distance = 55,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    Vclub = {
+        mixer = {
+            {
+                pos = vector3(-16.869159698486, 258.12573242188, 98.400367736816),
+                distance = 2,
+            },
+            --jobs = {""} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-13.862567901611, 272.6374206543, 96.856758117676),
+                distance = 100,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 1.0, 
+    },
+
+    beekers = {
+        mixer = {
+            {
+                pos = vector3(178.26194763184, 6389.7431640625, 30.273838043213),
+                distance = 2,
+            },
+            jobs = {"beekers"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(178.26194763184, 6389.7431640625, 30.273838043213),
+                distance = 75,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    americanmotors = {
+        mixer = {
+            {
+                pos = vector3(-233.75872802734, 6221.2631835938, 30.944061279297),
+                distance = 2,
+            },
+            jobs = {"cardealerNord"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-233.75872802734, 6221.2631835938, 30.944061279297),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    harmonyrep = {
+        mixer = {
+            {
+                pos = vector3(553.99328613281, 2760.8518066406, 41.126155853271),
+                distance = 2,
+            },
+            -- jobs = {"cardealerNord"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(553.99328613281, 2760.8518066406, 41.126155853271),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    bahamas = {
+        mixer = {
+            {
+                pos = vector3(-1388.9216308594, -606.32855224609, 30.518384933472),
+                distance = 2,
+            },
+            jobs = {"bahamas"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1388.9216308594, -606.32855224609, 30.518384933472),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    --postop = {
+        --mixer = {
+            --{
+                --pos = vector3(-422.82415771484, -2809.3061523438, 5.0003242492676),
+                --distance = 2,
+            --},
+            --jobs = {"postop"} -- if left nil everyone will be able to open it
+        --},
+        --speaker = {
+            --{
+                --pos = vector3(-422.82415771484, -2809.3061523438, 5.0003242492676),
+                --distance = 50,
+            --},
+        --},
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        --defaultVolume = 0.45, 
+    --},
+
+    
+    villagouv3 = {
+        mixer = {
+            {
+                pos = vector3(-1460.7473144531, 183.21446228027, 54.921485900879),
+                distance = 2,
+            },
+            --jobs = nil -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1460.7473144531, 183.21446228027, 54.921485900879),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    GOUVERNEMENT = {
+        mixer = {
+            {
+                pos = vector3(-425.1220703125, 1124.7193603516, 325.00817871094), ---1460.7473144531, 183.21446228027, 54.921485900879
+                distance = 2,
+            },
+            --jobs = nil -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-425.1220703125, 1124.7193603516, 325.00817871094),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    Gouvernementjardin = {
+        mixer = {
+            {
+                pos = vector3(490.42358398438, -223.41633605957, 36.459953308105),
+                distance = 5,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(490.42358398438, -223.41633605957, 35.459953308105),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+    
+    Gouvernementtribunal = {
+        mixer = {
+            {
+                pos = vector3(-523.572265625, -184.74041748047, 37.819713592529),
+                distance = 5,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-523.572265625, -184.74041748047, 36.819713592529),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    Gouvernementacceuil = {
+        mixer = {
+            {
+                pos = vector3(-553.58801269531, -189.43310546875, 38.219669342041),
+                distance = 5,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-553.58801269531, -189.43310546875, 37.219669342041),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    Gouvernementoffice = {
+        mixer = {
+            {
+                pos = vector3(-549.66064453125, -205.16648864746, 47.546363830566),
+                distance = 5,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-549.66064453125, -205.16648864746, 46.546363830566),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    GouvernementBroxfx1 = {
+        mixer = {
+            {
+                pos = vector3(-44.515777587891, 783.81848144531, 226.23330688477),
+                distance = 2,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-44.515777587891, 783.81848144531, 226.23330688477),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    GouvernementBroxfx2 = {
+        mixer = {
+            {
+                pos = vector3(63.904907226562, 830.41754150391, 226.74592590332),
+                distance = 2,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(63.904907226562, 830.41754150391, 226.74592590332),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    GouvernementBroxfx3 = {
+        mixer = {
+            {
+                pos = vector3(-88.621353149414, 843.72668457031, 226.74601745605),
+                distance = 2,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-88.621353149414, 843.72668457031, 226.74601745605),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    eventrapemperium = {
+        mixer = {
+            {
+                pos = vector3(-1207.3331298828, -1472.8111572266, 3.3347578048706),
+                distance = 2,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1207.3331298828, -1472.8111572266, 3.3347578048706),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    empiremusic2 = {
+        mixer = {
+            {
+                pos = vector3(260.83438110352, -33.438060760498, 73.876640319824),
+                distance = 2,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(260.83438110352, -33.438060760498, 73.876640319824),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    empiremusic3 = {
+        mixer = {
+            {
+                pos = vector3(194.23811340332, -13.262983322144, 68.892921447754),
+                distance = 2,
+            },
+            jobs = {"don"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(194.23811340332, -13.262983322144, 68.892921447754),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    doncountystore = {
+        mixer = {
+            {
+                pos = vector3(159.54930114746, 6640.7216796875, 30.698890686035),
+                distance = 2,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(159.54930114746, 6640.7216796875, 30.698890686035),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    rexstore = {
+        mixer = {
+            {
+                pos = vector3(2536.6301269531, 2634.7028808594, 36.945446014404),
+                distance = 2,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(2536.6301269531, 2634.7028808594, 36.945446014404),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    Heliwave = {
+        mixer = {
+            {
+                pos = vector3(-805.88018798828, -1368.916015625, 4.1785087585449),
+                distance = 2,
+            },
+            jobs = {"heliwave"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-805.88018798828, -1368.916015625, 4.1785087585449),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    QGSOkudo = {
+        mixer = {
+            {
+                pos = vector3(1051.0360107422, 2216.3588867188, 23.096580505371),
+                distance = 2,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(1051.0360107422, 2216.3588867188, 23.096580505371),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    SAMSPaleto = {
+        mixer = {
+            {
+                pos = vector3(-74.014366149902, 6531.5874023438, 31.462640762329), 
+                distance = 2,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-74.014366149902, 6531.5874023438, 31.462640762329),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    BeautyBar = {
+        mixer = {
+            {
+                pos = vector3(-767.48583984375, -159.23429870605, 40.593105316162), 
+                distance = 2,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-767.48583984375, -159.23429870605, 40.593105316162),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    TokyoManjikai = {
+        mixer = {
+            {
+                pos = vector3(124.54000091553, -3008.1389160156, 7.0408892631531), 
+                distance = 2,
+            },
+            -- jobs = {"postop"} -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(124.54000091553, -3008.1389160156, 7.0408892631531),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    Penthouse1 = {
+        mixer = {
+            {
+                pos = vector3(-271.11569213867, -747.12579345703, 125.52182769775),
+                distance = 2,
+            },
+            --jobs = nil -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-271.11569213867, -747.12579345703, 125.52182769775),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    Penthouse2 = {
+        mixer = {
+            {
+                pos = vector3(-291.46929931641, -731.12634277344, 130.44508361816),
+                distance = 2,
+            },
+            --jobs = nil -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-291.46929931641, -731.12634277344, 130.44508361816),
+                distance = 50,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    TattooAurore = {
+        mixer = {
+            {
+                pos = vector3(-1151.7437744141, -1427.05078125, 3.9559502601624),
+                distance = 2,
+            },
+            --jobs = nil -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1151.7437744141, -1427.05078125, 3.9559502601624),
+                distance = 25,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    eventmarlowe = {
+        mixer = {
+            {
+                pos = vector3(-1867.9964599609, 2069.4201660156, 139.99662780762),
+                distance = 2,
+            },
+            --jobs = nil -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1867.9964599609, 2069.4201660156, 139.99662780762),
+                distance = 100,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    DOJGouv11 = {
+        mixer = {
+            {
+                pos = vector3(-1631.9583740234, 165.30041503906, 61.057102203369),
+                distance = 2,
+            },
+            --jobs = nil -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1631.9583740234, 165.30041503906, 61.057102203369),
+                distance = 100,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    DOJGouv22 = {
+        mixer = {
+            {
+                pos = vector3(-1593.9880371094, 209.14709472656, 64.838523864746),
+                distance = 2,
+            },
+            --jobs = nil -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1593.9880371094, 209.14709472656, 64.838523864746),
+                distance = 100,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    DOJGouv33 = {
+        mixer = {
+            {
+                pos = vector3(-1568.7039794922, 220.60510253906, 58.443386077881),
+                distance = 2,
+            },
+            --jobs = nil -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1568.7039794922, 220.60510253906, 58.443386077881),
+                distance = 100,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    DOJGouv34 = {
+        mixer = {
+            {
+                pos = vector3(-1663.2298583984, 145.38439941406, 69.724601745605),
+                distance = 2,
+            },
+            --jobs = nil -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1663.2298583984, 145.38439941406, 69.724601745605),
+                distance = 100,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    DOJGouv45 = {
+        mixer = {
+            {
+                pos = vector3(-1680.8084716797, 183.10147094727, 69.756057739258),
+                distance = 2,
+            },
+            --jobs = nil -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1680.8084716797, 183.10147094727, 69.756057739258),
+                distance = 100,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+
+    DOJGouv56 = {
+        mixer = {
+            {
+                pos = vector3(-1576.4184570312, 204.41194152832, 64.252861022949),
+                distance = 2,
+            },
+            --jobs = nil -- if left nil everyone will be able to open it
+        },
+        speaker = {
+            {
+                pos = vector3(-1576.4184570312, 204.41194152832, 64.252861022949),
+                distance = 100,
+            },
+        },
+        -- max value is 1.0
+        -- 1.0 = 100% volume
+        defaultVolume = 0.45, 
+    },
+    
+    --    -----------------------------
+    --    BetItsUniqeNameEnough = {
+    --        mixer = {
+    --            {
+    --                pos = vector3(120.72, -1281.12, 29.48),
+    --                distance = 5,
+    --            },
+    --            -- jobs = {"job","other job"} -- if left nil everyone will be able to open it
+    --        },
+    --        speaker = {
+    --            {
+    --                pos = vector3(120.72, -1281.12, 29.48),
+    --                distance = 25,
+    --            },
+    --        },
+    --        -- max value is 1.0
+    --        -- 1.0 = 100% volume
+    --        defaultVolume = 0.5,
+    --    },
+}
+
+-- How much ofter the player position is updated ?
+Config.RefreshTime = 100
+
+-- how much close player has to be to the sound before starting updating position ?
+Config.distanceBeforeUpdatingPos = 40
+
+-- Message list
+Config.Messages = {
+    ["streamer_on"]  = "Streamer mode is on. From now you will not hear any music/sound.",
+    ["streamer_off"] = "Streamer mode is off. From now you will be able to listen to music that players might play.",
+}
+
+-- external xsound?
+Config.UseExternalxSound = false
+
+-- if you want to use high_3dsounds
+Config.UseHighSound = false
+
+-- name of the lib
+Config.xSoundName = "xsound"
+
+if Config.UseHighSound then
+    Config.xSoundName = "high_3dsounds"
+    Config.UseExternalxSound = true
+end

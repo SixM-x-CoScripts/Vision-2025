@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="keks.css" rel="stylesheet" type="text/css" />
+  </head>
+  <style>
+    #bg-video {
+      position: fixed;
+      right: 0;
+      bottom: 50%;
+      transform: translateY(50%);
+      min-width: 100%;
+      min-height: 100%;
+    }
+  </style>
+
+  <body>
+    <video autoplay loop id="bg-video" src="absolute.webm"></video>
+    <!-- <audio autoplay loop id="audio_loading" src="./music.mp3"></audio> -->
+    <audio autoplay loop id="audio_loading"></audio>
+    <div class="backdrop">
+      <div class="letni">
+        <h2 title="Chargement...">Chargement...</h2>
+        <h3></h3>
+        <p>
+          Appuyez sur la touche <strong>espace</strong> pour activer/désactiver
+          la musique
+        </p>
+      </div>
+      <div class="event">
+        <img src="https://visionrp.fr/assets/home/events.jpg" alt="image" />
+        <div class="event-text">
+          <h1>Course de Karting <span>21:00</span></h1>
+          <p>
+            Envie de sensation forte? Rejoignez nous pour une course de karting
+            ce soir!
+          </p>
+        </div>
+        <div class="label">
+          <img src="https://visionrp.fr/assets/logo.svg" alt="label" />
+          <span>Vision Event</span>
+        </div>
+      </div>
+      <div class="loadbar">
+        <div class="thingy"></div>
+      </div>
+    </div>
+
+    <script text="test/javascript">
+      let count = 0;
+      let thisCount = 0;
+
+      // const server = getConvar('server', "FA");
+      // console.log("-------------")
+      // console.log("-------------")
+      // console.log("-------------")
+      // console.log(server)
+      // console.log("-------------")
+      // console.log("-------------")
+      // console.log("-------------")
+      // const video = document.getElementById('bg-video');
+      // if (server === "FA") {
+      //   video.src = "videoFA.webm";
+      // } else {
+      //   video.src = "videoWL.webm";
+      // }
+
+      const handlers = {
+        initFunctionInvoking(data) {
+          console.log(
+            `initFunctionInvoking ${data.idx} ${count} ${thisCount}, ${
+              (data.idx / count) * 100
+            }`
+          );
+          document.querySelector(".thingy").style.left = "0%";
+          document.querySelector(".thingy").style.width =
+            (data.idx / count) * 100 + "%";
+        },
+
+        startDataFileEntries(data) {
+          count = data.count;
+        },
+
+        performMapLoadFunction(data) {
+          ++thisCount;
+
+          console.log(
+            `performMapLoadFunction ${count} ${thisCount}, ${
+              (thisCount / count) * 100
+            }`
+          );
+          document.querySelector(".thingy").style.left = "0%";
+          document.querySelector(".thingy").style.width =
+            (thisCount / count) * 100 + "%";
+        },
+      };
+
+      window.addEventListener("message", function (e) {
+        (handlers[e.data.eventName] || function () {})(e.data);
+      });
+    </script>
+
+    <script>
+      // const play = localStorage.getItem("vision_loadscreen_nomusic") != "1";
+      const musics = [
+       //"chiant.mp3",
+      //  "GTAViceCity.mp3",
+      //  "LoveIsALongRoad.mp3",
+      //  "GettinMoney.mp3",
+      //  "LadyHearMeTonight.mp3",
+      //  "GlamorousLudacris.mp3",
+      //  "RhythmOfTheNight.mp3",
+      //  "TheChainGangOf1974.mp3",
+      //  "GTA5Remix.mp3",
+      //  "GTA4Remix.mp3",
+      //  "GTASARemix.mp3",
+      //  "halloween.mp3"
+          "absolute.mp3",
+      ];
+      const myAudio = document.getElementById("audio_loading");
+
+      function playAudio() {
+        let music = musics[Math.floor(Math.random() * musics.length)];
+        myAudio.src = music;
+      }
+      playAudio();
+      myAudio.volume = 10.12;
+      var play = true;
+      function onKeyDown(event) {
+        switch (event.keyCode) {
+          case 32: //SpaceBar
+            if (play) {
+              myAudio.pause();
+              play = false;
+            } else {
+              myAudio.play();
+              play = true;
+            }
+            break;
+        }
+        return false;
+      }
+
+      window.addEventListener("keydown", onKeyDown, false);
+    </script>
+
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", () => {
+        const API_URL =
+          "https://vision-api-boutique.up.railway.app/loadingscreen/FA";
+        //const API_URL = "http://localhost:3001/loadingscreen/FA";
+
+        // pas fou je sais mais nique
+        fetch(API_URL)
+          .then((response) => response.json())
+          .then((data) => {
+            if (!data.event) return;
+            console.log(data);
+
+            const event = document.querySelector(".event");
+            const eventText = event.querySelector(".event-text");
+            const eventImg = event.querySelector("img");
+            const eventLabel = event.querySelector(".label");
+            const eventLabelSpan = eventLabel.querySelector("span");
+
+            const h1Element = eventText.querySelector("h1");
+            const spanElement = h1Element.querySelector("span");
+
+            if (h1Element && spanElement) {
+              h1Element.textContent = data.event.title;
+              // Re-add the span after updating h1 textContent
+              h1Element.appendChild(spanElement);
+              spanElement.textContent = data.event.time;
+            }
+
+            eventText.querySelector("p").textContent = data.event.description;
+            eventImg.src = data.event.image;
+            eventLabelSpan.textContent = data.event.label.text;
+
+            event.style.display = "flex";
+          });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,207 @@
+{
+	"debug": true,
+	"includeTextures": true,
+	"//__comment__//": "The image generation will take much longer and you will have much more images!",
+	"useQBVehicles": false,
+	"//__comment__//.": "If you want to use the QB Vehicles in the vehicles.lua file, set this to true. QBCore has to be installed and started before this script!",
+	"coreResourceName": "core",
+	"includedVehicleClasses": {
+	  "0": true,
+	  "1": true,
+	  "2": true,
+	  "3": true,
+	  "4": true,
+	  "5": true,
+	  "6": true,
+	  "7": true,
+	  "8": true,
+	  "9": true,
+	  "10": true,
+	  "11": true,
+	  "12": true,
+	  "13": true,
+	  "14": false,
+	  "15": false,
+	  "16": false,
+	  "17": true,
+	  "18": true,
+	  "19": true,
+	  "20": true,
+	  "21": false,
+	  "22": false
+	},
+	"//__comment__//..": "The classes that will be included in the image generation. See https://docs.fivem.net/natives/?_0x29439776AAA00A62",
+	"vehicleSpawnTimeout": 5000,
+	"//__comment__//...": "The time in milliseconds that the script will wait before spawning the next vehicle.",
+	"cameraSettings": {
+	  "CLOTHING": {
+		"1": {
+		  "fov": 30,
+		  "rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 120
+		  },
+		  "zPos": 0.65,
+		  "name": "Masks"
+		},
+		"3": {
+		  "fov": 55,
+		  "rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 155
+		  },
+		  "zPos": 0.3,
+		  "name": "Torsos"
+		},
+		"4": {
+		  "fov": 60,
+		  "rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 155
+		  },
+		  "zPos": -0.46,
+		  "name": "Legs"
+		},
+		"5": {
+		  "fov": 40,
+		  "rotation": {
+			"x": 0,
+			"y": 0,
+			"z": -25
+		  },
+		  "zPos": 0.3,
+		  "name": "Bags"
+		},
+		"6": {
+		  "fov": 40,
+		  "rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 120
+		  },
+		  "zPos": -0.85,
+		  "name": "Shoes"
+		},
+		"7": {
+		  "fov": 45,
+		  "rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 155
+		  },
+		  "zPos": 0.3,
+		  "name": "Accessories"
+		},
+		"8": {
+		  "fov": 45,
+		  "rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 155
+		  },
+		  "zPos": 0.3,
+		  "name": "Undershirts"
+		},
+		"9": {
+		  "fov": 45,
+		  "rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 155
+		  },
+		  "zPos": 0.3,
+		  "name": "Body Armors"
+		},
+		"11": {
+		  "fov": 55,
+		  "rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 155
+		  },
+		  "zPos": 0.26,
+		  "name": "Tops"
+		}
+	  },
+	  "PROPS": {
+		"0": {
+		  "fov": 30,
+		  "rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 120
+		  },
+		  "zPos": 0.75,
+		  "name": "Hats"
+		},
+		"1": {
+		  "fov": 20,
+		  "rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 120
+		  },
+		  "zPos": 0.7,
+		  "name": "Glasses"
+		},
+		"2": {
+		  "fov": 20,
+		  "rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 237.5
+		  },
+		  "zPos": 0.675,
+		  "name": "Ears"
+		},
+		"6": {
+		  "fov": 20,
+		  "rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 59
+		  },
+		  "zPos": 0.03,
+		  "name": "Watches"
+		},
+		"7": {
+		  "fov": 20,
+		  "rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 250
+		  },
+		  "zPos": 0.03,
+		  "name": "Bracelets"
+		}
+	  }
+	},
+	"greenScreenPosition": {
+	  "x": -1289.02,
+	  "y": -3409.83,
+	  "z": 20.91
+	},
+	"greenScreenRotation": {
+	  "x": 0,
+	  "y": 0,
+	  "z": 330
+	},
+	"greenScreenVehiclePosition": {
+	  "x": -1269.58,
+	  "y": -3383.08,
+	  "z": 14.13
+	},
+	"greenScreenVehicleRotation": {
+	  "x": 0,
+	  "y": 0,
+	  "z": 350.0
+	},
+	"greenScreenHiddenSpot": {
+	  "x": -1224.22,
+	  "y": -3349.63,
+	  "z": 13.96
+	}
+  }

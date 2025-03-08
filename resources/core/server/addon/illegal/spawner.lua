@@ -1,0 +1,7 @@
+-- RegisterNetEvent("drugsPos:spawnCar")
+-- AddEventHandler("drugsPos:spawnCar", function(pos)
+--     local veh = CreateVehicle(GetHashKey("youga2"), pos.x, pos.y, pos.z, pos.w, true, true)
+--     while not DoesEntityExist(veh) do
+--         Wait(1)
+--     end
+-- end)

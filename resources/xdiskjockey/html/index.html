@@ -1,0 +1,218 @@
+<!--    Redesign by Isigar <info@rcore.cz> - 3.10.2020-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./scripts/vue.min.js"></script>	
+    <script src="https://kit.fontawesome.com/07db3c916b.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+    <script src="./scripts/bootstrap-validate.js"></script>
+
+    <script src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflJJaNgk/www-widgetapi.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="./scripts/howler.min.js" type="text/javascript"></script>
+
+    <script src="./scripts/functions.js" type="text/javascript">updatePositionVolume();</script>
+    <script src="./scripts/bootstrap-notify.min.js"></script>
+    <script src="./scripts/locales.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/pult.css" type="text/css">
+    <link rel="stylesheet" href="css/notif.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+<body style="background:transparent; overflow: hidden; max-height: 80%;">
+<div id="app" v-if="visible">
+    <div id="djPult" v-if="page == 'pult'">
+        <div class="circle_play" @click='setPage("songs")'></div>
+        <div class="circle_stop" @click="stopMusic()"></div>
+
+        <div class="volume_plus" @click="updateVolume(true)"></div>
+        <div class="volume_minus" @click="updateVolume(false)"></div>
+
+        <div class="volume_progress" v-bind:style="volumeStyle"></div>
+    </div>
+    <div class="container mt-5" v-if="page == 'songs'">
+        <div class="row">
+            <div class="col-6">
+                <h1 style="color:white;">Your music</h1>
+            </div>
+            <div class="col-6 text-right">
+                <button @click="setPage('pult')" type="button" class="btn btn-dark"><i
+                        class="fas fa-long-arrow-alt-left"></i></button>
+                <div class="mt-3 mb-3">
+                    <button type="button" @click="openAddModal()" class="btn btn-success"><i
+                            class="fas fa-plus-circle"></i> Add new music
+                    </button>
+                    <button @click="setRenderType('box')" type="button" class="btn btn-outline-dark"
+                            v-bind:class="{ 'active': songRenderType == 'box' }"><i class="fas fa-th"></i></button>
+                    <button @click="setRenderType('line')" type="button" class="btn btn-outline-dark"
+                            v-bind:class="{ 'active': songRenderType == 'line' }"><i class="fas fa-grip-lines"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div v-if="songRenderType == 'box'">
+            <div class="row" style="overflow-y: auto;max-height: 700px;">
+                <div v-for="song in songs" class="col-lg-4 mb-2">
+                    <div class="card">
+                        <div class="card-body" style="padding: 15px;">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h5 class="card-title" style = "text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">{{song.label}}</h5>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <button v-if="!song.playing" @click="play(song)" type="button"
+                                            class="btn btn-success"><i class="fas fa-play"></i></button>
+                                    <button v-if="song.playing" @click="pause(song)" type="button"
+                                            class="btn btn-danger"><i class="fas fa-pause"></i></button>
+                                </div>
+                            </div>
+                            <div class="">
+                                <button type="button" @click="editSongModal(song)"
+                                        style="border:0; background: transparent;" class="card-link"><i
+                                        class="fas fa-edit"></i> Edit music
+                                </button>
+                                <button type="button" @click="removeSongModal(song)"
+                                        style="border:0; background: transparent;" class="card-link"><i
+                                        class="fas fa-times"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-if="songRenderType == 'line'">
+            <div class="row">
+                <table class="table table-stripped table-bordered">
+                    <tbody>
+                    <tr v-for="song in songs" class="col-lg-12 mb-2">
+                        <td>
+                            <div class="row">
+                                <div class="col-8">
+                                    <h5 class="card-title">
+                                        {{song.label}}
+                                        -
+                                        <button type="button" @click="editSongModal(song)"
+                                                style="border:0; color:#4e4e4e; font-size:15px; background: transparent;"
+                                                class="card-link"><i class="fas fa-edit"></i> Edit the music
+                                        </button>
+                                        <button type="button" @click="removeSongModal(song)"
+                                                style="border:0;color:#4e4e4e; font-size:15px; margin-left:0; background: transparent;"
+                                                class="card-link"><i class="fas fa-times"></i> Delete the music
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <button v-if="!song.playing" @click="play(song)" type="button"
+                                            class="btn btn-success"><i class="fas fa-play"></i></button>
+                                    <button v-if="song.playing" @click="pause(song)" type="button"
+                                            class="btn btn-danger"><i class="fas fa-pause"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addSong">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:white;">Add new music</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" @click="closeModal()">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name of the music</label>
+                        <input id="inputName" placeholder="Some cool song" type="text" required v-model="inputName"
+                               class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>URL</label>
+                        <input id="inputSrc" placeholder="https://youtube.com/..." type="text" required
+                               v-model="inputSrc" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button @click="addSong()" type="button" class="btn btn-success"><i
+                                class="fas fa-plus-circle"></i> Confirm
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editSong">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit the music</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" @click="closeModal()">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name of the music</label>
+                        <input id="editName" placeholder="Some cool song" type="text" required v-model="editName"
+                               class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>URL</label>
+                        <input id="editSrc" placeholder="https://youtube.com/..." type="text" required
+                               v-model="editSrc" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button @click="editSong()" type="button" class="btn btn-success"><i
+                                class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="removeSong">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger" style="color:white;">
+                    <h5 class="modal-title">Delete the music</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" @click="closeModal()">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" v-if="deleteSong">
+                    <div class="alert">
+                        Do you really wish to delete {{deleteSong.label}}?
+                        <div class="mt-3">
+                            <button @click="removeSong()" class="btn btn-danger" type="button">Yes</button>
+                            <button class="btn btn-dark" data-dismiss="modal" type="button">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./scripts/listener.js"></script>
+<script src="./xSound/config.js" type="text/javascript"></script>
+<script src="./xSound/listener.js" type="text/javascript"></script>
+<script src="./xSound/functions.js" type="text/javascript"></script>
+<script src="./xSound/SoundPlayer.js" type="text/javascript"></script>
+</body>
+</html>

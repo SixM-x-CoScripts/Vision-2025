@@ -1,0 +1,98 @@
+-- local token = nil
+
+-- TriggerEvent("core:RequestTokenAcces", "core", function(t)
+--     token = t
+-- end)
+
+
+-- local prison = {
+--     outfit = {
+--         male = {
+--             ['tshirt_1'] = 15, ['tshirt_2'] = 0,
+--             ['torso_1'] = 65, ['torso_2'] = 0,
+--             ['decals_1'] = 0, ['decals_2'] = 0,
+--             ['arms'] = 1,
+--             ['pants_1'] = 39, ['pants_2'] = 0,
+--             ['shoes_1'] = 24, ['shoes_2'] = 0,
+--             ['helmet_1'] = -1, ['helmet_2'] = 0,
+--             ['ears_1'] = -1, ['ears_2'] = 0,
+--             ['bproof_1'] = 0, ['bproof_2'] = 0,
+--             ['bags_1'] = 0, ['bags_2'] = 0,
+--             ['glasses_1'] = -1, ['glasses_2'] = 0,
+--             ['chain_1'] = -1, ['chain_2'] = 0,
+--             ['mask_1'] = 0, ['mask_2'] = 0
+--         },
+--         female = {
+--             ['tshirt_1'] = 14, ['tshirt_2'] = 0,
+--             ['torso_1'] = 59, ['torso_2'] = 0,
+--             ['decals_1'] = 0, ['decals_2'] = 0,
+--             ['arms'] = 0,
+--             ['pants_1'] = 38, ['pants_2'] = 0,
+--             ['shoes_1'] = 25, ['shoes_2'] = 0,
+--             ['helmet_1'] = -1, ['helmet_2'] = 0,
+--             ['ears_1'] = -1, ['ears_2'] = 0,
+--             ['bproof_1'] = 0, ['bproof_2'] = 0,
+--             ['bags_1'] = 0, ['bags_2'] = 0,
+--             ['glasses_1'] = -1, ['glasses_2'] = 0,
+--             ['chain_1'] = -1, ['chain_2'] = 0,
+--             ['mask_1'] = 0, ['mask_2'] = 0
+--         },
+--     },
+-- }
+
+-- local open = false
+-- local outfitmenu = RageUI.CreateMenu("Braquage", "Tenues de braquage", 0.0, 0.0)
+-- outfitmenu.Closed = function()
+--     open = false
+-- end
+
+-- function openbraquageOutfitMenu()
+--     if open then
+--         open = false
+--         RageUI.Visible(outfitmenu, false)
+--     else
+--         open = true
+--         RageUI.Visible(outfitmenu, true)
+--         Citizen.CreateThread(function()
+--             while open do
+--                 RageUI.IsVisible(outfitmenu, function()
+--                     RageUI.Button("Tenue", nil, {}, true, {
+--                         onSelected = function()
+--                             TriggerEvent('skinchanger:getSkin', function(skin)
+--                                 if skin.sex == 0 then
+--                                     TriggerEvent('skinchanger:loadClothes', skin, prison.outfit.male)
+--                                     p:saveSkin()
+--                                     TriggerSecurGiveEvent("core:addItemToInventory", token, "outfit", 1,
+--                                         { renamed = Braquage,
+--                                             data = p:skin(), })
+--                                 else
+--                                     TriggerEvent('skinchanger:loadClothes', skin, prison.outfit.female)
+--                                     p:saveSkin()
+--                                     TriggerSecurGiveEvent("core:addItemToInventory", token, "outfit", 1,
+--                                         { renamed = Braquage,
+--                                             data = p:skin(), })
+--                                 end
+--                             end)
+--                         end
+--                     })
+--                 end)
+--                 Wait(1)
+--             end
+--         end)
+--     end
+-- end
+
+
+-- zone.addZone(
+--     "braquage.Outfit" .. math.random(0, 156465654),
+--     vector3(255.3638458252, 206.76982116699, 105.2868347168),
+--     "~INPUT_CONTEXT~ Intéragir",
+--     function()
+--         openbraquageOutfitMenu()
+--     end,
+--     true,
+--     25, -- Id / type du marker
+--     0.6, -- La taille
+--     { 51, 204, 255 }, -- RGB
+--     170-- Alpha
+-- )

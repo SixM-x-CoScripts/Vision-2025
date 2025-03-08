@@ -1,0 +1,250 @@
+{
+    "wallpapers": {
+        "default": "default.jpg",
+        "cloud": "cloud.jpg",
+        "cloud2": "cloud2.jpg",
+        "cloud3": "cloud3.jpg",
+        "cloud4": "cloud4.jpg",
+        "cloud5": "cloud5.jpg",
+        "cloud6": "cloud6.jpg",
+        "cloud7": "cloud7.jpg",
+        "cloud8": "cloud8.jpg",
+        "cloud9": "cloud9.jpg",
+        "cloud10": "cloud10.jpg",
+        "cloud11": "cloud11.jpg",
+        "cloud12": "cloud12.jpg",
+        "pier": "pier.jpg",
+        "wheel": "Wheel.jpg",
+        "wheel2": "wheel2.jpg",
+        "lift": "lift.jpg",
+        "boat": "Boat.jpg",
+        "yacht": "yacht.jpg",
+        "cactus": "cactus.jpg",
+        "police": "police.jpg",
+        "thunder": "thunder.jpg",
+        "underwater": "underwater.jpg",
+        "globe": "Globe.jpg",
+        "globeNight": "GlobeNight.jpg",
+        "moon": "Moon.jpg",
+        "mountain": "mountain_01.jpg",
+        "mountain2": "mountain_02.jpg",
+        "mountain3": "mountain_03.jpg",
+        "mountain4": "mountain_04.jpg",
+        "mountain5": "mountain_05.jpg",
+        "mountain6": "mountain_06.jpg",
+        "mountain7": "mountain_07.jpg",
+        "desert": "desert_01.jpg",
+        "desert2": "desert_02.jpg",
+        "desert3": "desert_03.jpg",
+        "desert4": "desert_04.jpg",
+        "desert5": "desert_05.jpg",
+        "rose": "rose.jpg",
+        "rose2": "rose2.jpg",
+        "rose3": "rose3.jpg",
+        "wallpaper": "wallpaper.jpg",
+        "wallpaper2": "wallpaper2.jpg",
+        "wallpaper3": "wallpaper3.jpg",
+        "wallpaper4": "wallpaper4.jpg",
+        "wallpaper5": "wallpaper5.jpg",
+        "wallpaper6": "wallpaper6.jpg",
+        "wallpaper7": "wallpaper7.jpg",
+        "wallpaper8": "wallpaper8.jpg",
+        "wallpaper9": "wallpaper9.jpg",
+        "wallpaper10": "wallpaper10.jpg",
+        "wallpaper11": "wallpaper11.jpg",
+        "wallpaper12": "wallpaper12.jpg",
+        "wallpaper13": "wallpaper13.jpg",
+        "wallpaper14": "wallpaper14.jpg",
+        "wallpaper15": "wallpaper15.jpg",
+        "wallpaper16": "wallpaper16.jpg",
+        "wallpaper17": "wallpaper17.jpg",
+        "wallpaper18": "wallpaper18.jpg",
+        "wallpaper19": "wallpaper19.jpg",
+        "wallpaper20": "wallpaper20.jpg",
+        "wallpaper21": "wallpaper21.jpg"
+    },
+    "sounds": {
+        "ringtone": {
+            "default": "default.mp3",
+            "harp": "harp.mp3",
+            "apex": "apex.mp3",
+            "radar": "radar.mp3",
+            "sencha": "sencha.mp3",
+            "silk": "silk.mp3",
+            "summit": "summit.mp3"
+        },
+        "texttone": {
+            "default": "default.mp3"
+        },
+        "appNotifications": {}
+    },
+    "apps": {
+        "Phone": {
+            "name": "Phone",
+            "removable": false,
+            "size": 1900
+        },
+        "Messages": {
+            "name": "Messages",
+            "removable": false,
+            "size": 4400
+        },
+        "Notes": {
+            "name": "Notes",
+            "removable": false,
+            "size": 18600
+        },
+        "Settings": {
+            "name": "Settings",
+            "removable": false,
+            "size": 2300
+        },
+        "Photos": {
+            "name": "Photos",
+            "removable": false,
+            "size": 9000
+        },
+        "Camera": {
+            "name": "Camera",
+            "removable": false,
+            "size": 1200
+        },
+        "Weather": {
+            "name": "Weather",
+            "removable": false,
+            "size": 9400
+        },
+        "Calculator": {
+            "name": "Calculator",
+            "removable": false,
+            "size": 831
+        },
+        "AppStore": {
+            "name": "Apps",
+            "removable": false,
+            "size": 84000
+        },
+        "Clock": {
+            "name": "Clock",
+            "removable": false,
+            "size": 1200
+        },
+        "Maps": {
+            "name": "Maps",
+            "removable": false,
+            "size": 63400
+        },
+        "YellowPages": {
+            "name": "Pages",
+            "description": "Find local businesses and services",
+            "removable": true,
+            "size": 84400,
+            "images": ["1.webp", "2.webp"]
+        },
+        "MarketPlace": {
+            "name": "MarketPlace",
+            "description": "Buy and sell items",
+            "removable": true,
+            "size": 84400,
+            "images": ["1.webp", "2.webp", "3.webp", "4.webp"]
+        },
+        "Wallet": {
+            "name": "Wallet",
+            "removable": false,
+            "size": 2000
+        },
+        "Home": {
+            "name": "Home",
+            "removable": false,
+            "size": 19200
+        },
+        "Garage": {
+            "name": "Garage",
+            "removable": false,
+            "size": 17400
+        },
+        "Music": {
+            "name": "Music",
+            "description": "Listen to your favorite music",
+            "removable": true,
+            "size": 17400,
+            "images": ["1.webp", "2.webp"]
+        },
+        "DarkChat": {
+            "name": "Dark Chat",
+            "description": "Anonymous chat rooms",
+            "removable": true,
+            "size": 98500,
+            "images": ["1.webp", "2.webp", "3.webp", "4.webp"]
+        },
+        "Twitter": {
+            "name": "Birdy",
+            "icon": "./assets/img/icons/apps/Birdy.jpg",
+            "description": "Live news, sports and chat",
+            "removable": true,
+            "size": 256700,
+            "images": ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp"]
+        },
+        "Crypto": {
+            "name": "Crypto",
+            "description": "Track your crypto portfolio",
+            "removable": true,
+            "size": 256700,
+            "images": ["1.webp", "2.webp"]
+        },
+        "Mail": {
+            "name": "Mail",
+            "removable": false,
+            "size": 23200
+        },
+        "Services": {
+            "name": "Services",
+            "removable": false,
+            "size": 23200
+        },
+        "VoiceMemo": {
+            "name": "Voice Memos",
+            "removable": false,
+            "size": 28200
+        },
+        "Instagram": {
+            "name": "InstaPic",
+            "icon": "./assets/img/icons/apps/InstaPic.jpg",
+            "description": "Share photos and videos",
+            "removable": true,
+            "size": 223000,
+            "images": ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp"]
+        },
+        "Tinder": {
+            "name": "Spark",
+            "icon": "./assets/img/icons/apps/Spark.jpg",
+            "description": "Meet new people",
+            "removable": true,
+            "size": 187500,
+            "images": ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp"]
+        },
+        "TikTok": {
+            "name": "Trendy",
+            "icon": "./assets/img/icons/apps/Trendy.jpg",
+            "description": "Share photos and videos",
+            "removable": true,
+            "size": 223000,
+            "images": ["1.webp"]
+        }
+    },
+    "world_clock_locations": {
+        "New York": "America/New_York",
+        "London": "Europe/London",
+        "Paris": "Europe/Paris",
+        "Tokyo": "Asia/Tokyo",
+        "Sydney": "Australia/Sydney",
+        "Los Angeles": "America/Los_Angeles",
+        "New Delhi": "Asia/Kolkata",
+        "Hong Kong": "Asia/Hong_Kong",
+        "Rio de Janeiro": "America/Sao_Paulo",
+        "Mexico City": "America/Mexico_City",
+        "Cape Town": "Africa/Johannesburg",
+        "Stockholm": "Europe/Stockholm",
+        "Hawaii": "Pacific/Honolulu"
+    }
+}

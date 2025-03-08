@@ -1,0 +1,48 @@
+.buttonCustom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Lato';
+    border-radius: 3px;
+    cursor: pointer;
+
+    &.readOnly {
+        pointer-events: none;
+    }
+
+    &:hover {
+        filter: brightness(1.1)
+    }
+
+    &.green {
+        background: linear-gradient(180deg, rgba(30, 180, 90, 0.8) 0%, rgba(51, 150, 60, 0.8) 100%);
+    }
+
+    &.red {
+        background: linear-gradient(180deg, rgba(253, 127, 127, 0.5) 0%, rgba(224, 31, 31, 0.5) 100%);
+    }
+
+    &.blue {
+        background: linear-gradient(180deg, rgba(94, 108, 182, 0.8) 0%, rgba(94, 108, 182, 0.496) 100%);
+    }
+
+    &.yellow {
+        background: linear-gradient(180deg, rgba(251, 188, 4, 0.55) 0%, rgba(251, 157, 4, 0.55) 100%);
+    }
+
+    &.darkred {
+        background: linear-gradient(180deg, rgba(255, 0, 0, 0.4) 0%, rgba(199, 47, 47, 0.4) 100%);
+    }
+
+    &.black {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 8%, rgba(17, 16, 16, 0.7) 99.99%, rgba(74, 69, 69, 0.7) 100%);
+    }
+
+    &.disabled {
+        pointer-events: none;
+        filter: grayscale(1);
+    }
+
+
+}

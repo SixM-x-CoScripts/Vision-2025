@@ -1,0 +1,1 @@
+Server = GetConvar("server", "FA") -- FA = FreeAccess, WL = Whitelist

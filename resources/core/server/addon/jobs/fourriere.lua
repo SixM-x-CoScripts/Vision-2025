@@ -1,0 +1,13 @@
+RegisterNetEvent("core:paySocietyPounder")
+AddEventHandler("core:paySocietyPounder", function(amount, society)
+    print("Fourriere", amount, society)
+    print(RemoveMoneyToSociety(tonumber(amount), society))
+    return RemoveMoneyToSociety(tonumber(amount), society)
+end)
+
+RegisterNetEvent("core:paySociety")
+AddEventHandler("core:paySociety", function(amount, society)
+    print("Payement de la société", amount, society)
+    print(RemoveMoneyToSociety(tonumber(amount), society))
+    return RemoveMoneyToSociety(tonumber(amount), society)
+end)

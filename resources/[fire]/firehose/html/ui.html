@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.min.js" type="text/javascript"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body style="background-color: rgba(0, 0, 0, 0);display: block;">
+    <div class="mainDiv">
+        <div class="green">
+            <div class="progress">
+                <div class="inner">
+                    <div class="water"></div>
+                    <div class="glare"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+    <script>
+        var audioPlayer = null;
+        window.addEventListener('message', function(event) {
+            if (event.data.Type === "playSound") {
+                if (event.data.File === 'none') {
+                    if (audioPlayer != null) {
+                        audioPlayer.pause();
+                        audioPlayer = null;
+                    }
+                } else {
+                    try {
+                        audioPlayer = new Howl({
+                            src: ["./sounds/" + event.data.File + ".ogg"]
+                        });
+                        audioPlayer.volume(0.1);
+                        audioPlayer.play();
+                    } catch (err) {
+                        $.post('http://pressurewasher/msg', JSON.stringify({
+                            text: err.message
+                        }));
+                    }
+                }
+
+            }
+        });
+    </script>
+</body>
+
+</html>

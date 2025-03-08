@@ -1,0 +1,277 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+#tuto-form {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.46) 54.69%,
+    rgba(0, 0, 0, 0.19) 100%
+  );
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  color: #fff;
+  border-radius: 3px 12px;
+  width: 30%;
+  transition: 0.3s;
+}
+
+#tuto-form > h1 {
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.46) 54.69%,
+    rgba(0, 0, 0, 0.19) 100%
+  );
+  padding: 0.5rem 1.2rem;
+  border-radius: 3px 12px 0px 0px;
+}
+
+#tuto-form > h1::after {
+  content: "Bienvenue sur Absolute";
+  font-size: 15px;
+  font-weight: 300;
+}
+
+#tuto-form > p {
+  font-size: 15px;
+  font-weight: 300;
+  margin: 1.5rem 0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+#tuto-form > span {
+  display: flex;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.46) 54.69%,
+    rgba(0, 0, 0, 0.19) 100%
+  );
+  border-radius: 0px 0px 3px 12px;
+  padding: 0.5rem;
+}
+
+#tuto-form > span > button {
+  border-radius: 3.352px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 195, 18, 0.78) 0%,
+    rgba(30, 180, 90, 0.39) 100%
+  );
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 35%;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+#tuto-form > span > button#no {
+  background: linear-gradient(
+    180deg,
+    #f5b623 0%,
+    rgba(245, 182, 35, 0.38) 100%
+  );
+  width: min-content;
+}
+
+#tuto-form > span > button#yes {
+  margin: 0 auto;
+}
+
+#tuto-form > span > button:hover {
+  transform: scale(1.1);
+}
+
+#helper {
+  border-radius: 3px 12px 3px 12px;
+  position: absolute;
+  bottom: 6rem;
+  right: 1rem;
+  color: #fff;
+  text-transform: uppercase;
+  transition: 0.3s;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.46) 54.69%,
+    rgba(0, 0, 0, 0.19) 100%
+  );
+  display: none;
+
+  width: 465px;
+}
+
+#helper > h2 {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.46) 54.69%,
+    rgba(0, 0, 0, 0.19) 100%
+  );
+  font-size: 22px;
+  border-radius: 3px 12px 0 0;
+  padding: 5px 1.5rem;
+  font-weight: 700;
+}
+
+#helper > p {
+  font-size: 11px;
+  font-weight: 300;
+  padding: 8px 1.5rem;
+  border-radius: 0 0 3px 12px;
+}
+
+#helper > img {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  width: 0.8rem;
+}
+
+#helper-key {
+  display: none;
+
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.46) 54.69%,
+    rgba(0, 0, 0, 0.19) 100%
+  );
+  padding: 0.35rem 1rem;
+  border-radius: 3px 12px 3px 12px;
+
+  position: absolute;
+  bottom: 7.8rem;
+  right: 1rem;
+
+  animation: all 0.3s ease-in-out;
+}
+
+#helper-key > img {
+  width: 0.8rem;
+}
+
+.slideToTop {
+  animation: slideToTop 0.5s ease-in-out;
+}
+
+.slideFromTop {
+  animation: slideFromTop 0.5s ease-in-out;
+}
+
+.slideToBottom {
+  animation: slideToBottom 0.5s ease-in-out;
+}
+
+.slideFromBottom {
+  animation: slideFromBottom 0.5s ease-in-out;
+}
+
+.slideToLeft {
+  animation: slideToLeft 0.5s ease-in-out;
+}
+
+.slideFromLeft {
+  animation: slideFromLeft 0.5s ease-in-out;
+}
+
+@keyframes slideToTop {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-150%);
+  }
+}
+
+@keyframes slideFromTop {
+  0% {
+    transform: translateY(-150%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideToBottom {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(150%);
+  }
+}
+
+@keyframes slideFromBottom {
+  0% {
+    transform: translateY(150%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideToLeft {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(150%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideFromLeft {
+  0% {
+    transform: translateX(150%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,77 @@
+/*Notification styles*/
+[data-notify="progressbar"] {
+    margin-bottom: 0px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 5px;
+}
+.alert-success {
+    background-color: #27ae60;
+    color: #eeeeee !important;
+}
+.alert-success [data-notify="progressbar"] {
+    margin-bottom: 0px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 5px;
+    background: #27ae60 !important;
+}
+.alert-success .progress-bar {
+    background: #2ecc71 !important;
+}
+.alert {
+    border: 0!important;
+    z-index: 1000000!important;
+}
+.alert-info {
+    background-color: #2980b9;
+    color: #eeeeee !important;
+}
+.alert-info [data-notify="progressbar"] {
+    margin-bottom: 0px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 5px;
+    background: #2980b9 !important;
+}
+.alert-info .progress-bar {
+    background: #3498db !important;
+}
+.alert-danger {
+    background-color: #c0392b;
+    color: #eeeeee !important;
+}
+.alert-danger [data-notify="progressbar"] {
+    margin-bottom: 0px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 5px;
+    background: #c0392b !important;
+}
+.alert-danger .progress-bar {
+    background: #e74c3c !important;
+}
+.alert-warning {
+    background-color: #d35400;
+    color: #eeeeee !important;
+}
+.alert-warning [data-notify="progressbar"] {
+    margin-bottom: 0px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 5px;
+    background: #d35400 !important;
+}
+.alert-warning .progress-bar {
+    background: #e67e22 !important;
+}

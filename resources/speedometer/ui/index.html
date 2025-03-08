@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="huds">
+      <div class="hud dashboard">
+        <div class="speedometer">
+          <svg class="circle" width="50" height="50">
+            <circle
+              class="progress progress-speed"
+              stroke="url(#gradient)"
+              stroke-width="4"
+              style="stroke-opacity: 1"
+              fill="transparent"
+              r="20"
+              cx="25"
+              cy="25"
+              stroke-dasharray="70 30"
+              stroke-dashoffset="0"
+            />
+            <defs>
+              <linearGradient id="gradient">
+                <stop offset="30%" stop-color="#FF0245" />
+                <stop offset="100%" stop-color="#BBFFFE" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="text">
+            <span class="speed"></span>
+            <div class="kmh">km/h</div>
+          </div>
+        </div>
+
+        <div class="hud fuel">
+          <img class="logo" src="./assets/fuel.svg"></img>
+          <svg class="circle" width="50" height="50">
+            <circle
+              class="background"
+              stroke="#FFFFFF"
+              stroke-width="3"
+              style="stroke-opacity: 0.2"
+              fill="transparent"
+              r="22"
+              cx="25"
+              cy="25"
+              stroke-dashoffset="0"
+            />
+            <!---->
+            <circle
+              class="progress progress-fuel"
+              stroke="#FFF"
+              style="stroke-opacity: 0.7"
+              stroke-width="3"
+              fill="transparent"
+              r="22"
+              cx="25"
+              cy="25"
+            />
+          </svg>
+        </div>
+
+        <div class="hud health">
+          <img class="logo" src="./assets/engine.svg"></img>
+          <svg class="circle" width="50" height="50">
+            <circle
+              class="background"
+              stroke="#FFFFFF"
+              stroke-width="3"
+              style="stroke-opacity: 0.2"
+              fill="transparent"
+              r="22"
+              cx="25"
+              cy="25"
+            />
+            <!---->
+            <circle
+              class="progress progress-health"
+              stroke="#FFF"
+              style="stroke-opacity: 0.7"
+              stroke-width="3"
+              fill="transparent"
+              r="22"
+              cx="25"
+              cy="25"
+              stroke-dasharray="100"
+              stroke-dashoffset="80"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS Scripts -->
+    <!-- <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"
+    ></script> -->
+    <script src="script.js" type="text/javascript"></script>
+  </body>
+</html>

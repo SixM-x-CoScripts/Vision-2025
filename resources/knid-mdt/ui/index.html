@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDT</title>
+  <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+  <style>
+    :root {
+      --tablet-height-ratio: 99vmin;
+      --color: 38, 38, 37;
+      --background-color: 242, 242, 242;
+    }
+
+    @media(prefers-color-scheme: dark) {
+      :root {
+        --color: 242, 242, 242;
+        --background-color: 38, 38, 37;
+      }
+    }
+
+    .tablet,
+    .tablet .tablet-background {
+      position: absolute;
+      width: 85vw;
+      height: calc(var(--tablet-height-ratio) * 0.87);
+      background-color: rgba(var(--background-color), 1);
+      border-radius: calc(var(--tablet-height-ratio) / 48);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 calc(var(--tablet-height-ratio) / 200) #9d9ea0;
+      color: var(--color);
+    }
+
+    .tablet-background {
+      height: 100%;
+      padding: 25px;
+      border-radius: calc(var(--tablet-height-ratio) / 24);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tablet-background::before {
+      content: '';
+      border-radius: calc(var(--tablet-height-ratio) / 48);
+      background-size: cover;
+      background-position: center;
+      border: solid black calc(var(--tablet-height-ratio) / 200);
+      opacity: 1;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: auto;
+      height: auto;
+      z-index: -3;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border-radius: calc(var(--tablet-height-ratio) / 48);
+      background-color: rgba(242, 242, 242, 1);
+    }
+
+    .close {
+      position: relative;
+      right: 0;
+      top: 0;
+      font-size: 20px;
+      color: rgb(var(--color));
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 25px;
+    }
+
+    .close span {
+      cursor: pointer;
+    }
+
+    html {
+      font-size: 16px;
+      color: rgb(var(--color));
+    }
+  </style>
+  <script defer>
+    $(function () {
+      $(".tablet").fadeOut(0);
+
+      $(".close span").click(function () {
+        $(".tablet").fadeOut(100);
+        fetch(`https://${GetParentResourceName()}/close`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+          },
+          body: JSON.stringify({}),
+        }).then((res) => res.json()).then((data) => {
+          console.log(data);
+        }).catch((err) => {
+          console.log(err);
+        });
+      });
+    });
+
+    window.addEventListener('message', function (event) {
+      if (event.data.type === "open") {
+        const iframe = $("#webFrame");
+
+        if (iframe.attr('src') === "") {
+          iframe.attr('src', event.data.url);
+        }
+
+        $(".tablet").fadeIn(100);
+      } else if (event.data.type === "close") {
+        $(".tablet").fadeOut(100);
+      }
+    });
+  </script>
+</head>
+
+<body data-theme="dark">
+  <div class="tablet">
+    <div class="tablet-background">
+      <iframe id="webFrame" src="" frameborder="0"></iframe>
+    </div>
+    <div class="close">
+      <span title="Close">&#10006;</span>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CWeaponModelInfo__InitDataList>
+	<InitDatas>
+		<Item>
+			<modelName>w_mg_firehose</modelName>
+			<txdName>w_mg_firehose</txdName>
+			<ptfxAssetName>null</ptfxAssetName>
+			<lodDist value="100"/>
+		</Item>
+	</InitDatas>
+</CWeaponModelInfo__InitDataList>

@@ -1,0 +1,752 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
+
+/* body {
+  background-image: url("https://cdn.discordapp.com/attachments/657088050635079741/1228347790040764548/image.png?ex=668aa306&is=66895186&hm=73d1d22570050298428313a2fd3b023007c65d7244ba738bef734c655e9b0cbe&");
+} */
+
+#statusHud {
+  width: 14.16%;
+  position: absolute;
+  bottom: 2.65%;
+  left: 1.44%;
+}
+
+#statusHudArmour {
+  width: 14.16%;
+  position: absolute;
+  bottom: 2%;
+  left: 1.44%;
+}
+
+#varHealth {
+  width: 100%;
+  margin-left: 0px !important;
+  border-radius: 0 0 6px 6px;
+}
+
+#varArmour {
+  width: 100%;
+  margin-left: 0px !important;
+  border-radius: 0 0 6px 6px;
+}
+/* 
+#varOxygen {
+    width: 100%;
+    margin-left: 0px !important;
+    border-radius: 0 0 6px 6px;
+} */
+
+#varHealth > #boxSetHealth {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 180, 90, 0.729) 0%,
+    rgba(49, 255, 68, 0.702) 100%
+  );
+  border-radius: 0 0 6px 6px;
+}
+
+#varArmour > #boxSetArmour {
+  background: linear-gradient(
+    180deg,
+    rgba(19, 81, 117, 0.729) 0%,
+    rgba(10, 121, 186, 0.702) 100%
+  );
+  border-radius: 0 0 6px 6px;
+}
+
+#varArmour > .barArmour {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0 0 6px 6px;
+}
+
+/* #varOxygen> #boxSetOxygen {
+    background: linear-gradient(180deg, rgba(19, 81, 117, 0.729) 0%, rgba(10, 121, 186, 0.702) 100%);
+    border-radius: 0 0 6px 6px;
+} */
+#SafeZoneIndicator {
+  visibility: hidden;
+
+  position: absolute;
+  bottom: 14.5%;
+  left: 1.5%;
+  border-top-left-radius: 5px;
+
+  width: 30px;
+  height: 30px;
+
+  padding: 10px;
+
+  background: rgba(30, 180, 90, 0.729);
+  background: linear-gradient(
+    130deg,
+    rgba(30, 180, 90, 0.729) 10%,
+    rgba(255, 255, 255, 0) 50%
+  );
+}
+
+#SafeZoneIndicator > img {
+  width: 20px;
+  height: 20px;
+}
+
+.bar {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 0 0 6px 6px;
+  width: 100%;
+  height: 8px;
+  float: left;
+  margin-right: 1px;
+  margin-left: 1px;
+  z-index: 98;
+}
+
+.barArmour {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 0 0 6px 6px;
+  width: 100%;
+  height: 8px;
+  float: left;
+  margin-right: 1px;
+  margin-left: 1px;
+  z-index: 98;
+}
+
+/* #barOxygen {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 0 0 6px 6px;
+    width: 100%;
+    height: 160px;
+    float: left;
+    margin-right: 1px;
+    margin-left: 1px;
+    z-index: 98;
+}
+
+ */
+#boxSetHealth {
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.8) 74.73%,
+    rgba(0, 0, 0, 0.579167) 83.15%,
+    rgba(0, 0, 0, 0.368) 100%
+  );
+  position: relative;
+  border-radius: 0 0 6px 6px;
+  bottom: 0;
+  z-index: 97;
+}
+
+#boxSetArmour {
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.8) 74.73%,
+    rgba(0, 0, 0, 0.579167) 83.15%,
+    rgba(0, 0, 0, 0.368) 100%
+  );
+  position: relative;
+  border-radius: 0 0 6px 6px;
+  bottom: 0;
+  z-index: 97;
+}
+
+/* #boxSetOxygen {
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 74.73%, rgba(0, 0, 0, 0.579167) 83.15%, rgba(0, 0, 0, 0.368) 100%);
+    position: relative;
+    border-radius: 0 0 6px 6px;
+    bottom: 0;
+    z-index: 97;
+} */
+
+.AdminOverlay {
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+
+  height: 15px;
+  width: 200px;
+
+  top: 1rem;
+  right: 1%;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  display: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+
+  z-index: 2;
+}
+
+.AdminOverlay .divider {
+  /*Vertical divider*/
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  height: 100%;
+}
+
+.AdminOverlay #activePlayers {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.AdminOverlay #activeReports {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.AdminOverlay > h2,
+.AdminOverlay > p {
+  color: #fff;
+}
+
+.AdminOverlay > h2 {
+  font-size: 1.2rem;
+  text-align: center;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: #c40155;
+}
+.AdminOverlay > p {
+  line-height: normal;
+
+  margin: 0;
+  & > span {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+}
+
+.LimitedActionsOverlay {
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+
+  height: 15px;
+  width: 200px;
+
+  top: 1rem;
+  right: 1%;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2;
+}
+
+.LimitedActionsOverlay > p {
+  color: #fff;
+  font-size: 1rem;
+  line-height: normal;
+  margin: 0;
+  & > span {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-left: 5px;
+  }
+}
+
+.AdminOverlayAlert {
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+
+  height: 7.5px;
+  width: 200px;
+
+  top: 3.2rem;
+  right: 1%;
+  border-radius: 0 0 5px 5px;
+  background: rgba(255, 115, 0, 0.8);
+  padding: 10px;
+  display: none;
+  align-items: center;
+  justify-content: space-around;
+
+  z-index: 1;
+}
+
+.AdminOverlayAlert > p {
+  color: #fff;
+  font-size: 0.9rem;
+  line-height: normal;
+  margin: 0;
+  & > span {
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+}
+
+.AdminOverlayAlert > .icon {
+  width: 15px;
+  height: 15px;
+
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(255, 115, 0, 0.8);
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.appearFromTop {
+  animation: appearFromTop 0.5s ease-in-out;
+}
+
+.disappearToTop {
+  animation: disappearToTop 0.5s ease-in-out;
+}
+
+.shakeAnim {
+  animation: shake infinite 0.5s;
+}
+
+.WeazelAnnounce {
+  display: none;
+
+  position: fixed;
+  font-family: "Roboto", sans-serif;
+
+  height: 60px;
+  width: 100%;
+
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(180deg, #f93232 0%, #ab1818 100%);
+
+  align-items: center;
+  justify-content: space-between;
+  z-index: 9999;
+
+  border-top: 3px solid white;
+
+  animation: weazelAnim 20s ease-in-out;
+}
+
+.WeazelAnnounce .icon {
+  background: linear-gradient(180deg, #f93232 0%, #ab1818 100%);
+  z-index: 9999;
+
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.WeazelAnnounce .icon > img {
+  width: 200px;
+  margin-left: 50px;
+  margin-right: 50px;
+
+  z-index: 9999;
+}
+
+.WeazelAnnounce .text {
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 100%;
+
+  text-align: end;
+  z-index: 9998;
+}
+
+.WeazelAnnounce .text > p {
+  animation: slidingText 20s linear infinite;
+}
+
+.PlayersSelectionHotkeys {
+  position: absolute;
+  bottom: 2.5%;
+  left: 16.5%;
+
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.PlayersSelectionHotkeys > div {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+
+  padding: 5px;
+}
+
+.PlayersSelectionHotkeys > div > img {
+  width: 25px;
+  height: 25px;
+}
+
+.PlayersSelectionHotkeys > div > p {
+  color: #000000;
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  font-family: "Roboto", sans-serif;
+
+  background: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 0;
+}
+
+.appearFromLeft {
+  animation: appearFromLeft 0.5s ease-in-out;
+}
+
+.disappearToLeft {
+  animation: disappearToLeft 0.5s ease-in-out;
+}
+
+#VehicleInTry {
+  visibility: hidden;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  width: 40%;
+  height: 40%;
+
+  background: linear-gradient(
+    150deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0) 40%
+  );
+
+  padding: 15px;
+  font-family: "Roboto", sans-serif;
+}
+
+#VehicleInTry .Content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+#VehicleInTry .Content .Separator {
+  width: 300px;
+  height: 5px;
+  background: linear-gradient(180deg, #ff7034 0%, #ff2300 100%);
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+#VehicleInTry .Content .Vehicle {
+  font-size: 51px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+#VehicleInTry .Content .Timer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+#VehicleInTry .Content .Timer .Time {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+#VehicleInTry .Content .Exit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  padding-top: 1rem;
+}
+
+#VehicleInTry .Content .Exit .Key {
+  background-color: #fff;
+  color: #000;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 7.5px 5px;
+  border-radius: 5px;
+}
+
+#VehicleInTry .Content .Exit .Label {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#Elections {
+  visibility: hidden;
+  position: fixed;
+  top: 10;
+
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+#Elections .Candidat {
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+
+  align-items: flex-end;
+  justify-content: flex-start;
+  width: 400px;
+}
+
+#Elections .Candidat .Name {
+  position: relative;
+  left: -20px;
+  bottom: 5;
+
+  margin: 0;
+  padding: 0;
+
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+#Elections .Candidat img {
+  width: 75px;
+  height: 75px;
+  z-index: 3;
+}
+
+#Elections .Candidat .Progress {
+  position: relative;
+  left: -50px;
+
+  width: 350px;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 5px 10px 3px 0;
+}
+
+#Elections .Candidat .Progress .Bar-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 0%;
+  height: 100%;
+
+  border-radius: 5px 10px 3px 0;
+  z-index: 2;
+
+  transition: width 2s ease-in-out;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 14, 143, 0.5) 0%,
+    rgba(0, 57, 205, 0.2) 100%
+  );
+}
+
+#Elections .Candidat .Progress .Bar-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 0%;
+  height: 100%;
+
+  border-radius: 5px 10px 3px 0;
+  z-index: 2;
+
+  transition: width 2s ease-in-out;
+  background: linear-gradient(
+    90deg,
+    rgba(220, 11, 12, 0.8) 0%,
+    rgba(132, 40, 43, 0.8) 100%
+  );
+}
+
+#Elections .Candidat .Progress .Percentage {
+  position: absolute;
+  right: 10;
+  top: -10;
+
+  z-index: 3;
+}
+
+.appearFromTop {
+  animation: appearFromTop 0.5s forwards;
+}
+
+.disappearToTop {
+  animation: disappearToTop 0.5s forwards;
+}
+
+@keyframes slidingText {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  2.5% {
+    opacity: 1;
+  }
+  97.5% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+/*appearFromTop & disappearToTop anims */
+@keyframes appearFromTop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes disappearToTop {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+/*appearFromBottom & disappearToBottom anims */
+@keyframes appearFromBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes disappearToBottom {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes weazelAnim {
+  0% {
+    transform: translateY(100%);
+  }
+  5% {
+    transform: translateY(0);
+  }
+  95% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes appearFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes disappearToLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(5px);
+  }
+}

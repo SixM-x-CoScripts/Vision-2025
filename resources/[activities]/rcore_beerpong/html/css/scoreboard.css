@@ -1,0 +1,58 @@
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+.table {
+    padding: 1vw;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.highlight{
+    background-color: #fbd86c !important;
+}
+
+.table-cell {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.leader {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 auto;
+    width: 16vw;
+    height: 12vw;
+}
+
+.leader li {
+    background-color: #fff;
+    border-radius: 0.5vw;
+    height: 2.5vw;
+    margin-bottom: 0.5vw;
+    overflow: hidden;
+    box-shadow: 0 0.1vw 0.4vw rgb(0 0 0 / 10%);
+    position: relative;
+    transition: top 1s ease 0s;
+}
+
+.leader li h2 {
+    display: block;
+    margin: 0;
+    font-size: 1.25vw;
+    line-height: 0.5vw;
+    font-weight: 300;
+    margin-top: 1vw;
+    padding-right: 1vw;
+    padding-left: 1vw;
+}
+
+.leader li h2 .number {
+	float: right;
+	font-weight: bold;
+	color: rgba(0, 0, 0, 0.65);
+	transition: color 0.3s;
+}

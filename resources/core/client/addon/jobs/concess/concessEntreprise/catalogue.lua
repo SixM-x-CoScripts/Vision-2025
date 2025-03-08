@@ -1,0 +1,188 @@
+-- catalogueEnterprise = {
+--     { name = "Scout Arjent ", model = "pscout", price = 15000, liveries = 0 },
+--     { name = "Scout Valor ", model = "pscoutnew", price = 15000, liveries = 0 },
+--     { name = "Alamo ", model = "polalamo", price = 15000, liveries = 0 },
+--     { name = "Buffalo 2013", model = "police2new", price = 15000, liveries = 0 },
+--     { name = "Stanier K9 ", model = "police1k9", price = 15000, liveries = 0 },
+--     { name = "Stanier K9 2", model = "police1k9b", price = 15000, liveries = 0 },
+--     { name = "Scout K9 ", model = "policek9", price = 15000, liveries = 0 },
+--     { name = "Sadler K9", model = "polsadlerk9", price = 15000, liveries = 0 },
+--     { name = "Moto ", model = "lspdb", price = 15000, liveries = 0 },
+--     { name = "Scorcher LSPD", model = "pbike", price = 15000, liveries = 0 },
+--     { name = "Alamo old", model = "polalamoold", price = 15000, liveries = 0 },
+--     { name = "Stanier ", model = "police", price = 15000, liveries = 0 },
+--     { name = "Buffalo 2003 ", model = "police2c", price = 15000, liveries = 0 },
+--     { name = "Torrence ", model = "police3new", price = 15000, liveries = 0 },
+--     { name = "Stanier UMK ", model = "police4", price = 15000, liveries = 0 },
+--     { name = "Buffalo UMK ", model = "police42old", price = 15000, liveries = 0 },
+--     { name = "Stanier OLD ", model = "policeold", price = 15000, liveries = 0 },
+--     { name = "Stanier SLICK ", model = "policeslick", price = 15000, liveries = 0 },
+--     { name = "Riot ", model = "polriot", price = 15000, liveries = 0 },
+--     { name = "Speedo ", model = "polspeedo", price = 15000, liveries = 0 },
+--     { name = "Speedo Express", model = "polnspeedo", price = 15000, liveries = 0 },
+--     { name = "MOC", model = "mocpacker", price = 15000, liveries = 0 },
+--     { name = "Raiden ", model = "polraiden", price = 15000, liveries = 0 },
+--     { name = "Torrence SLICK ", model = "police3slick", price = 15000, liveries = 0 },
+--     { name = "Torrence UMK ", model = "police3umk", price = 15000, liveries = 0 },
+--     { name = "Speedo UMK ", model = "umkspeedo", price = 15000, liveries = 0 },
+--     { name = "Buffalo 2009 UMK ", model = "unmarkbuff", price = 15000, liveries = 0 },
+--     { name = "Buffalo 2013 UMK ", model = "pdumkbuffalo", price = 15000, liveries = 0 },
+--     { name = "Scout UMK", model = "umkscout", price = 15000, liveries = 0 },
+--     { name = "Scout ER", model = "nscoutlspd", price = 15000, liveries = 0 },
+--     { name = "Bus Academy", model = "coachlspd", price = 15000, liveries = 0 },
+--     { name = "Scout Slicktop", model = "nscoutumk", price = 15000, liveries = 0 },
+--     { name = "Maverick", model = "lspdmav", price = 15000, liveries = 0 },
+--     { name = "Oracle UMK", model = "unmarkora", price = 15000, liveries = 0 },
+--     { name = "Sultan UMK", model = "unmarksult", price = 15000, liveries = 0 },
+--     { name = "Scout 2017", model = "nscoutlspd", price = 15000, liveries = 0 },
+--     { name = "Scout Slicktop", model = "nscoutumk", price = 15000, liveries = 0 },
+--     { name = "Vélo LSPD", model = "pbike", price = 500, liveries = 0 },
+--     { name = "Buffalo TD", model = "buffalotd", price = 15000, liveries = 0 },
+--     { name = "Elegy RH72 Drift", model = "elegyrh72d", price = 15000, liveries = 0 },
+--     { name = "Gauntlet Drift", model = "gauntlet4d", price = 15000, liveries = 0 },
+--     { name = "Jester Classique Drift", model = "jester3d", price = 15000, liveries = 0 },
+--     { name = "Sentinel SG3A Drift", model = "sentinelsg3ad", price = 15000, liveries = 0 },
+--     { name = "Stratum Custom Drift", model = "stratumcd", price = 15000, liveries = 0 },
+--     { name = "Sunrise Drift", model = "sunrise1d", price = 15000, liveries = 0 },
+
+--     --Weazel
+--     { name = "Maverick Weazel", model = "newsmav", price = 15000, liveries = 0 },
+--     { name = "Camionette Weazel 1", model = "newsvan", price = 15000, liveries = 0 },
+--     { name = "Camionette Weazel 2", model = "newsvan2", price = 15000, liveries = 0 },
+
+--     --Taxi
+--     { name = "Taxi Minivan", model = "cabby", price = 15000, liveries = 0 },
+--     { name = "Taxi Merit", model = "merittaxi", price = 15000, liveries = 0 },
+--     { name = "Taxi Stanier", model = "staniertaxi", price = 15000, liveries = 0 },
+--     { name = "Taxi Baller", model = "ballertaxi", price = 15000, liveries = 0 },
+--     { name = "Taxi Classique", model = "taxi", price = 15000, liveries = 0 },
+
+--     --Mécano
+--     { name = "Flatbed", model = "flatbed3", price = 15000, liveries = 0 },
+--     { name = "Slamtruck", model = "slamtruck", price = 15000, liveries = 0 },
+--     { name = "Tow Truck", model = "towtruck", price = 15000, liveries = 0 },
+--     { name = "Tow Truck Rouillé", model = "towtruck2", price = 15000, liveries = 0 },
+
+--     --Resto
+--     { name = "Food Truck", model = "Taco", price = 15000, liveries = 0 },
+--     { name = "Vapid Steed", model = "steed2", price = 16350, liveries = 0 },
+--     { name = "Vapid Speedo Express", model = "nspeedo", price = 34840, liveries = 0 },
+--     { name = "Faggio Tacos Racho", model = "faggiotr", price = 5000, liveries = 0 },
+--     { name = "Faggio Sushi Star", model = "faggioss", price = 5000, liveries = 0 },
+--     { name = "Faggio Burgershot", model = "faggiobs", price = 5000, liveries = 0 },
+
+--     --EMS
+--     { name = "Blazer EMS", model = "blazerems", price = 15000, liveries = 0 },
+--     { name = "Dinghy EMS", model = "dinghyems", price = 15000, liveries = 0 },
+--     { name = "Speedo EMS", model = "emsnspeedo", price = 15000, liveries = 0 },
+--     { name = "Caracara EMS", model = "caracaraems", price = 15000, liveries = 0 },
+--     { name = "Landstalker EMS", model = "emsroamer", price = 15000, liveries = 0 },
+--     { name = "EMS Vélo", model = "emsbike", price = 500, liveries = 0 },
+
+
+--     --Gouv
+--     { name = "Limousine Gouvernemental", model = "onebeast", price = 15000, liveries = 0 },
+--     { name = "Granger Gouvernemental", model = "cat", price = 15000, liveries = 0 },
+--     { name = "Granger 3600XL Gouvernemental", model = "halfback2", price = 15000, liveries = 0 },
+--     { name = "Granger 3600XL Watch Gouvernemental", model = "watchtower2", price = 15000, liveries = 0 },
+--     { name = "Hazard Gouvernemental", model = "hazard", price = 15000, liveries = 0 },
+--     { name = "Granger 3600XL Inaugural", model = "inaugural2", price = 15000, liveries = 0 },
+--     { name = "Road Runner Gouvernemental", model = "roadrunner2", price = 15000, liveries = 0 },
+--     { name = "Van Gouvernemental", model = "usssvan2", price = 15000, liveries = 0 },
+-- }
+
+
+-- local open = false
+-- local used = false
+-- local previewPos = vector4(1175.8155517578, -3262.9897460938, 6.5891108512878, 93.407989501953)
+
+-- local previewVeh
+-- local previewModel
+-- local main = RageUI.CreateMenu("", "Gestion", 0.0, 0.0, "root_cause", "shopui_title_premiumdeluxe")
+-- local token = nil
+
+-- TriggerEvent("core:RequestTokenAcces", "core", function(t)
+--     token = t
+-- end)
+-- main.Closed = function()
+--     if previewVeh ~= nil then
+--         TriggerEvent('persistent-vehicles/forget-vehicle', previewVeh)
+--         DeleteEntity(previewVeh)
+--     end
+--     used = TriggerServerCallback("core:EntrepriseCatalogueState", false)
+-- end
+
+-- function OpenCatalogueEntrepriseMenu()
+--     if open then
+--         open = false
+--         return
+--     else
+--         open = true
+--         RageUI.Visible(main, true)
+--         used = TriggerServerCallback("core:EntrepriseCatalogueState", true)
+--         CreateThread(function()
+--             while open do
+--                 RageUI.IsVisible(main, function()
+--                     for k, v in pairs(catalogueEnterprise) do
+--                         RageUI.Button(v.name, false, { RightLabel = "~g~" .. v.price .. "$" }, true, {
+--                             onActive = function()
+--                                 if previewModel == nil or previewModel ~= v.model then
+--                                     if previewVeh ~= nil then
+--                                         TriggerEvent('persistent-vehicles/forget-vehicle', previewVeh)
+--                                         DeleteEntity(previewVeh)
+--                                     end
+--                                     if not DoesEntityExist(previewVeh) then
+--                                         previewVeh = nil
+--                                         previewActive = true
+--                                         previewVeh = vehicle.create(v.model, previewPos,
+--                                             { plate = "VENTE" })
+--                                         previewModel = v.model
+--                                         FreezeEntityPosition(previewVeh, true)
+--                                         SetVehicleEngineOn(previewVeh, 1, 1, 0)
+--                                         SetVehicleDoorsLockedForAllPlayers(previewVeh, 1)
+--                                         SetVehicleLivery(previewVeh, v.liveries)
+--                                     end
+--                                 end
+--                             end
+--                         })
+--                     end
+--                 end)
+--                 Wait(1)
+--             end
+--         end)
+--     -- end
+-- -- end
+
+-- -- -1317.7603759766, -1518.7332763672, 4.4247484207153
+
+-- Citizen.CreateThread(function()
+--     while zone == nil do Wait(1) end
+--     zone.addZone(
+--         "entreprise_catalogue",
+--         --vector3(1177.8591308594, -3257.9438476563, 6.0287623405457), -- Position
+--         "~INPUT_CONTEXT~ Catalogue", -- Text afficher
+--         function() -- Action qui seras fait
+--             used = TriggerServerCallback("core:GetUsed")
+--             if used then
+--                 -- ShowNotification("~r~Quelqu'un utilise déjà le catalogue")
+
+--                 -- New notif
+--                 exports['vNotif']:createNotification({
+--                     type = 'ROUGE',
+--                     -- duration = 5, -- In seconds, default:  4
+--                     content = "~s Quelqu'un utilise déjà le catalogue"
+--                 })
+
+--                 return
+--             else
+--                 OpenCatalogueEntrepriseMenu()
+--             end
+--         end,
+--         false, -- Avoir un marker ou non
+--         25, -- Id / type du marker
+--         0.6, -- La taille
+--         { 51, 204, 255 }, -- RGB
+--         170-- Alpha
+--     )
+
+-- end)

@@ -1,0 +1,32 @@
+{
+  // Auto Brands
+  "brands": [
+    "addonautobrand1",
+    "addonautobrand2"
+	],
+
+  "addonautobrand1": [
+    "addoncarname1"
+  ],
+  "addonautobrand2": [
+    "addoncarname2"
+  ],
+
+  // Rest go here
+  "vehicles": [
+    "addoncarname1",
+    "addoncarname2"
+  ],
+  "peds": [
+    "addonpedmodel1",
+    "addonpedmodel2"
+  ],
+  "weapons": [
+    "addonweaponname1",
+    "addonweaponname2"
+  ],
+  "weapon_components": [
+    "weapon_component_name_1",
+    "weapon_component_name_2"
+  ]
+}

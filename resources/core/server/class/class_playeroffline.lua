@@ -1,0 +1,182 @@
+-- offlineplayers = {
+--     id = 0, ---@private
+--     uid = 0, ---@private
+--     discord = 0, ---@private
+--     fivemid = 0, ---@private
+--     source = 0,
+--     license = "", ---@private
+--     firstname = "", ---@private
+--     lastname = "", ---@private
+--     age = "02/01/2000", ---@private
+--     sex = "", ---@private
+--     size = 180, ---@private
+--     birthplaces = "", ---@private
+--     inventaire = {}, ---@private
+--     weapons = {}, ---@private
+--     cloths = { skin = {}, cloths = {} }, ---@private
+--     tattoos = {}, ---@private
+--     degrader = {},
+--     banque = 5000, ---@private
+--     pos = Config.defaultPos, ---@private
+--     permission = 0, ---@private
+--     balance = 0, ---@private
+--     subscription = 0, ---@private
+--     buyendDate = 0, ---@private
+--     job = "aucun", ---@private
+--     job_grade = 1, ---@private
+--     crew = "None", ---@private
+--     status = { hunger = 99, thirst = 99 , health = 200}, ---@private
+--     vip = 0,
+--     needSave = false, ---@private
+--     needPosSave = false,
+--     active = 1,
+--     idPerso = {},
+--     idPersoNum = {},
+--     lastProperty = {},
+--     hasvoted = 0,
+-- }
+
+-- offlineplayers.__index = offlineplayers
+
+-- offlineplayersList = {} ---@type offlineplayers[]
+
+-- local p = {} ---@type offlineplayers
+
+-- ---@return offplayer
+-- function GetOfflinePlayers(license)
+--     return offlineplayersList[license]
+-- end
+
+-- ---@return offplayer
+-- function GetActiveOfflinePlayer(license)
+--     if offlineplayersList[license] then
+--         for k,v in pairs(offlineplayersList[license]) do
+--             if v.active == 1 then
+--                 return v
+--             end
+--         end
+--     end
+--     return nil
+-- end
+
+-- -- todo opti mdr c pas beau
+-- -- RemoveOfflinePlayer
+-- function RemovePlayerOffline(license, id)
+--     if offlineplayersList[license] then
+--         for k,v in pairs(offlineplayersList[license]) do
+--             if v.id == id then
+--                 table.remove(offlineplayersList[license], k)
+--                 return
+--             end
+--         end
+--     end
+-- end
+
+-- function RemoveAllOfflinePlayers(license)
+--     if offlineplayersList[license] then
+--         offlineplayersList[license] = nil
+--     end
+-- end
+
+-- ---@return player
+-- function GetOfflinePlayer(id)
+--     return p[id]
+-- end
+
+-- function offlineplayers:update(data)
+--     self.id = data.id
+--     self.uid = data.uid
+--     self.discord = data.discord
+--     self.fivemid = data.fivemid
+--     self.source = source
+--     self.license = data.license
+--     self.firstname = data.firstname
+--     self.lastname = data.lastname
+--     self.age = data.age
+--     self.sex = data.sex
+--     self.birthplaces = data.birthplaces
+--     self.inventaire = formatInventoryForPlayer((type(data.inventaire) == "string" and json.decode(data.inventaire) or data.inventaire), data.crew, data.hasvoted)
+--     if data.weapons == nil then
+--         self.weapons = {}
+--     else
+--         self.weapons = type(data.weapons) == "string" and json.decode(data.weapons) or deepcopy(data.weapons)
+--     end
+--     self.cloths = type(data.cloths) == "string" and json.decode(data.cloths) or deepcopy(data.cloths)
+--     self.tattoos = type(data.tattoos) == "string" and json.decode(data.tattoos) or deepcopy(data.tattoos)
+--     self.degrader = type(data.degrader) == "string" and json.decode(data.degrader) or deepcopy(data.degrader)
+--     self.banque = data.banque
+--     self.pos = type(data.pos) == "string" and json.decode(data.pos) or deepcopy(data.pos)
+--     self.permission = data.permission
+--     self.subscription = data.subscription
+--     self.buyendDate = data.buyendDate or 0
+--     self.balance = data.balance
+--     self.job = data.job
+--     self.job_grade = data.job_grade
+--     self.crew = data.crew
+--     self.crewType = getCrewByName(data.crew) and getCrewByName(data.crew):getType() or "Normal"
+--     self.status = type(data.status) == "string" and json.decode(data.status) or data.status
+--     self.vip = data.vip
+--     self.needSave = false
+--     self.needPosSave = false
+--     self.active = data.active or 1
+--     self.idPerso = {}
+--     self.idPersoNum = {}
+--     if self.cloths.cloths == nil then
+--         self.cloths.cloths = {}
+--     end
+--     self.lastProperty = type(data.lastProperty) == "string" and json.decode(data.lastProperty) or data.lastProperty
+--     self.hasvoted = 1
+--     p[data.id] = self
+-- end
+
+-- function offlineplayers:new(data, license)
+--     if not offlineplayersList[license] then
+--         offlineplayersList[license] = {}
+--     end
+--     local self = setmetatable({}, offlineplayers)
+--     self.id = data.id
+--     self.uid = data.uid
+--     self.discord = data.discord
+--     self.fivemid = data.fivemid
+--     self.source = source
+--     self.license = data.license
+--     self.firstname = data.firstname
+--     self.lastname = data.lastname
+--     self.age = data.age
+--     self.sex = data.sex
+--     self.birthplaces = data.birthplaces
+--     self.inventaire = formatInventoryForPlayer((type(data.inventaire) == "string" and json.decode(data.inventaire) or data.inventaire), data.crew, data.hasvoted)
+--     if data.weapons == nil then
+--         self.weapons = {}
+--     else
+--         self.weapons = type(data.weapons) == "string" and json.decode(data.weapons) or data.weapons
+--     end
+--     self.cloths = type(data.cloths) == "string" and json.decode(data.cloths) or data.cloths
+--     self.tattoos = type(data.tattoos) == "string" and json.decode(data.tattoos) or data.tattoos
+--     self.degrader = type(data.degrader) == "string" and json.decode(data.degrader) or data.degrader
+--     self.banque = data.banque
+--     self.pos = type(data.pos) == "string" and json.decode(data.pos) or data.pos
+--     self.permission = data.permission
+--     self.subscription = data.subscription
+--     self.buyendDate = data.buyendDate or 0
+--     self.balance = data.balance
+--     self.job = data.job
+--     self.job_grade = data.job_grade
+--     self.crew = data.crew
+--     self.crewType = getCrewByName(data.crew) and getCrewByName(data.crew):getType() or "Normal"
+--     self.status = type(data.status) == "string" and json.decode(data.status) or data.status
+--     self.vip = data.vip
+--     self.needSave = false
+--     self.needPosSave = false
+--     self.active = type(data.active) == "number" and data.active or 0
+--     self.idPerso = {}
+--     self.idPersoNum = {}
+--     if self.cloths.cloths == nil then
+--         self.cloths.cloths = {}
+--     end
+--     self.lastProperty = type(data.lastProperty) == "string" and json.decode(data.lastProperty) or data.lastProperty
+--     self.hasvoted = 1
+--     table.insert(offlineplayersList[license], self)
+--     p[data.id] = self
+--     return self
+-- end

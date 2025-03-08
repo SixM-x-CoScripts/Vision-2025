@@ -1,0 +1,156 @@
+<body>
+  <div class="voiceContainer">
+    <img class="chuchoter hide" src="./CHUCHOTER.svg" />
+    <img class="crier hide" src="./CRIER.svg" />
+    <img class="normal hide" src="./NORMAL.svg" />
+    <div class="range"></div>
+  </div>
+</body>
+
+<style>
+  body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    /* background-color: rgba(0, 0, 0, 0.429); */
+  }
+  .voiceContainer {
+    position: fixed;
+    left: 300px;
+    bottom: 60px;
+    display: flex;
+    height: 20px;
+  }
+  img {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .normal,
+  .crier {
+    transform: translate(4px);
+  }
+  .range {
+    position: absolute;
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 18px;
+    display: flex;
+    width: 100px;
+    justify-content: center;
+    top: 50px;
+    left: 0;
+    transform: translateX(-22px);
+    align-items: center;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
+  .force {
+    display: flex !important;
+  }
+  .hide {
+    display: none;
+  }
+</style>
+
+<script>
+  let voiceRange = "normal";
+  let timer;
+
+  const range = document.querySelector(".range");
+  const images = document.querySelectorAll("img");
+
+  const onMessage = (event) => {
+    if (event.data.type === "voice") {
+      const data = event.data.data;
+      if (data.voiceRange && data.voiceRange !== voiceRange) {
+        voiceRange = data.voiceRange;
+        range.classList.remove("hide");
+        range.innerHTML = data.voiceRange.toUpperCase();
+        images.forEach((e) => {
+          e.classList.remove("force");
+          e.classList.add("hide");
+        });
+        document.querySelector("." + data.voiceRange).classList.add("force");
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          document
+            .querySelector("." + data.voiceRange)
+            .classList.remove("force");
+          range.classList.add("hide");
+        }, 3000);
+      }
+      if (data.isSpeaking) {
+        document.querySelector("." + voiceRange).classList.remove("hide");
+      } else {
+        document.querySelector("." + voiceRange).classList.add("hide");
+      }
+    }
+  };
+
+  window.addEventListener("message", onMessage);
+
+//   window.addEventListener("keydown", (ev) => {
+//     if (ev.key === "a") {
+//       postMessage({
+//         type: "voice",
+//         data: {
+//           isSpeaking: true,
+//         },
+//       });
+//     }
+//     if (ev.key === "z") {
+//       if (voiceRange === "normal") {
+//         postMessage({
+//           type: "voice",
+//           data: {
+//             voiceRange: "crier",
+//           },
+//         });
+//       }
+//       if (voiceRange === "crier") {
+//         postMessage({
+//           type: "voice",
+//           data: {
+//             voiceRange: "chuchoter",
+//           },
+//         });
+//       }
+//       if (voiceRange === "chuchoter") {
+//         postMessage({
+//           type: "voice",
+//           data: {
+//             voiceRange: "normal",
+//           },
+//         });
+//       }
+//     }
+//   });
+
+//   window.addEventListener("keyup", (ev) => {
+//     if (ev.key === "a") {
+//       postMessage({
+//         type: "voice",
+//         data: {
+//           isSpeaking: false,
+//         },
+//       });
+//     }
+//   });
+
+//   postMessage({
+//     type: "voice",
+//     data: {
+//       voiceRange: "crier",
+//       isSpeaking: false,
+//     },
+//   });
+</script>

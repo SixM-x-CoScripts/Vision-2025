@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="./css/style.css" media="screen"/>
+	<script src="./scripts/Libraries/vue.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:600" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+			integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+			crossorigin="anonymous"></script>
+	<script src="./scripts/Libraries/bootstrap-notify.min.js"></script>
+	<script src="./scripts/Libraries/audiosynth.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.32/Tone.min.js" integrity="sha512-5bi4sAolb6DHch5jbwQQ7S4HzdMbP4/mSwxsE5K3h0OcJgNXXH+5zQHY1j60JOoNlL4cxhUrVCYqksmtqIF0Fg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<link rel="stylesheet" href="./css/notif.css" type="text/css">
+	<link rel="stylesheet" href="./css/animation.css">
+</head>
+<body id="bd" style="background: transparent;">
+<div class="container">
+	<div class="modal fade bd-example-modal-lg" id = "test" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="eh_alright_dude_two">{{lang["instrument_volume"]}}</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="CloseFromVolumeManager()">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" >
+					<form onkeydown="return event.key != 'Enter';">
+						<div v-if="instrumentsList.length == 0">
+						</div>
+						<div v-else>
+							<div v-once v-for="item, index in instrumentsList">
+								<br>
+								<div class="range-slider grad" :style='item.stuff' >
+									<input :id="item.itemName" type="range" min="0" max="100" step="1" :value="item.volume" oninput="this.parentNode.style.setProperty('--value',this.value); this.parentNode.style.setProperty('--text-value', JSON.stringify((+this.value).toLocaleString()))">
+									<output class = "output" style="font-size: 12px;">
+										{{item.prefix}}
+									</output>
+									<div class='range-slider__progress'></div>
+									{{UpdateText(item.itemName, item.volume)}}
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" @click="CloseFromVolumeManager()">{{lang["save_volume"]}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade bd-example-modal-lg" id = "confirm_to_delete" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="...-.--.-.-">{{lang["confirm_delete"]}}</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="Close()">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					{{lang["yo_are_you_sure_dude"]}} <u>{{selectedMusic}}</u>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" @click = "DeleteSavedMusic()">{{lang["delete"]}}</button>
+					<button type="button" class="btn btn-primary" @click = "Close()">{{lang["close"]}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div v-if="visible == 'record'">
+
+		<div class="modal fade" id="jsontext" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false"
+			 data-backdrop="static">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">{{lang["paste_json"]}}</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="Close()">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form onkeydown="return event.key != 'Enter';">
+							<div class="form-group">
+								<textarea class="jsonarea" style="min-height: 28vw;min-width: 100%;"></textarea>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" @click="Close()">{{lang["load_json"]}}</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" @click="Close()">{{lang["close"]}}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="put_a_note" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false"
+			 data-backdrop="static">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">{{lang["select_note"]}}</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="Close()">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label class="col-form-label">{{lang["select_note_key"]}}</label><br>
+
+								<button style="margin: 1px;" v-for="item, index in keyNotes"
+										type="button"
+										class="btn"
+										@click="ChooseNote(item, true)"
+										v-on:dblclick="ChooseNote(item, true, true)"
+										v-bind:class="{ 'btn-primary': item.active, 'btn-secondary': !item.active}">
+									{{item.Note}}
+								</button>
+
+								<br>
+								<label class="col-form-label">{{lang["select_sharp_key"]}}</label><br>
+
+								<button style="margin: 1px;" v-for="item, index in keySharpNotes" type="button"
+										class="btn"
+										@click="ChooseNote(item, false)"
+										v-on:dblclick="ChooseNote(item, true, true)"
+										v-bind:class="{ 'btn-primary': item.active, 'btn-secondary': !item.active}">
+									{{item.Note}}
+								</button>
+
+								<br>
+								<label class="col-form-label">{{lang["select_octavia"]}}</label><br>
+
+								<button style="margin: 1px;" v-for="item, index in octaviaList" type="button"
+										class="btn"
+										@click="PickOctavia(item)"
+										v-bind:class="{ 'btn-primary': item.active, 'btn-secondary': !item.active}">
+									{{item.octavia}}
+								</button>
+
+								<br>
+								<label class="col-form-label">{{lang["select_type_tone"]}}</label><br>
+
+								<button style="margin: 1px;" v-for="item, index in pianoNotesType" type="button"
+										class="btn"
+										@click="PickTypeTone(item)"
+										v-bind:class="{ 'btn-primary': item.active, 'btn-secondary': !item.active}">
+									{{item.label}}
+								</button>
+
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" @click="PutNote()">{{lang["create"]}}</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" @click="RemoveNoteFromRecorder()">{{lang["remove_note"]}}</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" @click="Close()">{{lang["close"]}}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="record_container">
+			<textarea id="sheet_name" spellcheck="false">{{lang["default_sheet_name"]}}</textarea>
+			<h1 style="color: black;text-decoration: none;font-size: 1.5vw;position: absolute;left: 0;right: 0;top: 6.2%;">Page: {{pageEx + 1}}</h1>
+			<div class="sheet"  id = "sheet_1" v:test="htmlIndex = 0">
+				<div v-for="n in 5" class="line" v-bind:id="'note_' + (n - 1)">
+					<div v-for="b in 25"
+						 class="container-for-note"
+						 v-bind:class="{ playing: playingNoteFromRecord[(25 * (n - 1) + (b - 1))]}"
+						 v-bind:data="'key_id_' + (b - 1)"
+						 @click="EditRecordedNote((25 * (n - 1) + (b - 1)))">
+						{{pianoNotesRecord[(25 * (n - 1) + (b - 1))]}}
+					</div>
+				</div>
+			</div>
+
+			<div class="timing" v-for="n in 25">{{((timingNotes / 1000) * n).toFixed(1)}}s</div>
+
+			<div class="sheet" id="sheet_2">
+				<div v-for="n in 5" class="line" v-bind:id="'note_' + (5 + (n - 1))">
+					<div v-for="b in 25"
+						 class="container-for-note"
+						 v-bind:class="{ playing: playingNoteFromRecord[(125 + ((25 * (n - 1)) + (b - 1)))]}"
+						 v-bind:data="'key_id_' + (124 + (b - 1))"
+						 @click="EditRecordedNote((125 + ((25 * (n - 1)) + (b - 1))))">
+						{{pianoNotesRecord[(125 + ((25 * (n - 1)) + (b - 1)))]}}
+					</div>
+				</div>
+			</div>
+
+			<div class="bottom-container" style="width: 37%;height: 5%;bottom: 5%;left: 0;">
+				<div style="margin: auto; width: fit-content;">
+					<p @click="PrevPage()">{{lang["prev_page"]}} |</p>
+					<p @click="NextPage()">{{lang["next_page"]}} |</p>
+					<p @click="LoadJsonSheet()">{{lang["from_json"]}}</p>
+				</div>
+			</div>
+
+			<div class="bottom-container" style="width: 100%;left: 0;">
+				<div style="margin: auto; width: fit-content;">
+					<p v-if="!isRecordedMusicPlaying" @click="PlayRecordedMusic()">{{lang["play_template"]}} |</p>
+					<p v-else @click="StopRecordedMusic()"> {{lang["stop_template"]}} |</p>
+
+					<p @click="SaveTemplate()">{{lang["save_template"]}} |</p>
+					<p @click="ScrapTemplate()">{{lang["scrap_template"]}} |</p>
+					<p @click="BackToPiano()">{{lang["back_to_piano"]}}</p>
+				</div>
+			</div>
+
+			<div class="bottom-container" style="bottom: -4vw;">
+				<h1 style="color: white;font-size: 1.2vw;text-decoration: none;">{{lang["delay_notes"]}} {{(timingNotes / 1000).toFixed(2)}}s</h1>
+				<input v-model="timingNotes" id="changetiming" type="range" min="100" max="2000" step="5" value="300" style="width: 100%;"/>
+			</div>
+		</div>
+	</div>
+	<div v-if="visible == 'piano'">
+		<div class="modal fade" id="new_name" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="eh_alright_dude">{{lang["select_new_name"]}}</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="Close()">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form onkeydown="return event.key != 'Enter';">
+							<div class="form-group">
+								<label for="new_name_input" class="col-form-label">{{lang["new_name_desc"]}}</label>
+								<input min="3" maxlength="25" size="25" class="form-control" id="new_name_input">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" @click="Close()">{{lang["close"]}}</button>
+						<button type="button" class="btn btn-primary" @click="ChangeName()">{{lang["change_name"]}}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="options_to_do" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false"
+			 data-backdrop="static">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="option">{{lang["what_to_choose"]}}</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="Close()">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form onkeydown="return event.key != 'Enter';">
+							<div class="form-group">
+								<button type="button" class="btn btn-secondary newbut" data-dismiss="modal" @click="PlaySavedMusic()">
+									{{lang["play"]}}
+								</button>
+								<button type="button" class="btn btn-secondary newbut" @click="OpenModalForDelete">
+									{{lang["delete"]}}
+								</button>
+								<button type="button" class="btn btn-secondary newbut" @click="EditSavedMusic()">
+									{{lang["edit_music"]}}
+								</button>
+								<button type="button" class="btn btn-secondary newbut" @click="RenameSavedMusic()">
+									{{lang["change_name"]}}
+								</button>
+								<button type="button" class="btn btn-secondary newbut" @click="ClipboardLuaTableSheet()">
+									{{lang["copy_code"]}}
+								</button>
+								<button type="button" class="btn btn-secondary newbut" @click="ClipboardJsonTableSheet()">
+									{{lang["copy_json"]}}
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="textboard" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false"
+			 data-backdrop="static">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="textboard_header">{{lang["copied_text"]}}</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="Close()">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form onkeydown="return event.key != 'Enter';">
+							<div class="form-group">
+								<textarea class="textarea" style="min-height: 28vw;min-width: 100%;"></textarea>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" @click="Close()">{{lang["close"]}}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="piano-bg">
+			<div id="piano">
+				<div class="white-keys" v-for="item, index in piano"
+					 @click="PlayPianoNote(index)"
+
+					 @mousedown="SetNoteColorActive(index, true)"
+					 @mouseleave="SetNoteColorActive(index, false)"
+					 @mouseup="SetNoteColorActive(index, false)"
+
+					 v-bind:class="{ 'active-white': item.Active}">
+
+					<div class="black-keys" v-bind:class="{ 'active-black': item.ActiveSharp}"
+						 @click="PlayPianoSharpNote(index)"
+
+						 @mousedown="SetSharpNoteColorActive(index, true)"
+						 @mouseleave="SetSharpNoteColorActive(index, false)"
+						 @mouseup="SetSharpNoteColorActive(index, false)"
+
+						 v-if="!!item.SharpNote">
+						<div class = "note-text" v-if="item.BindKeySharpNote != -9999 && !keybindSettings">
+							{{String.fromCharCode(item.BindKeySharpNote)}}
+						</div>
+						<div v-else>
+							<button v-bind:class="{ 'record': item.RecordingSharpKey}"
+									@click="SetNewKeyBind(index, true)">
+								{{String.fromCharCode(item.BindKeySharpNote)}}
+							</button>
+						</div>
+
+						<div class="bottom-text sharp">{{item.SharpNote}}</div>
+					</div>
+
+					<div class="black-keys" v-if="!!item.SharpNote == false" style="background: transparent;border-color: transparent;"></div>
+
+					<div class = "note-text" v-if="!keybindSettings">
+						{{String.fromCharCode(item.BindKeyNote)}}
+					</div>
+					<div v-else>
+						<button v-bind:class="{ 'record': item.RecordingKey}" @click="SetNewKeyBind(index, false)">
+							{{String.fromCharCode(item.BindKeyNote)}}
+						</button>
+					</div>
+
+					<div class="bottom-text">
+						{{item.KeyNote}}
+					</div>
+				</div>
+			</div>
+			<div class = "container-octave-button">
+				<div style="position: absolute;color: white;bottom: 1.675vw;left: 2.55vw;">{{lang["octave"]}}</div>
+				<div class = "box" @click="DownOctave()">
+					<p>◀</p>
+				</div>
+				<div class = "box">
+					<p v-if="ActiveOctave == 1">5..7</p>
+					<p v-if="ActiveOctave == 0">2..4</p>
+				</div>
+				<div class = "box" @click="UpOctave()">
+					<p>▶</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="settings">
+			<div class="settings-container">
+				<div class="box">
+					<h1>
+						{{lang["prerecorded_music"]}}
+					</h1>
+					<ul>
+						<li v-for="item, index in pianoPlayList" @click="PlayPlayback(item.name)">{{item.label}}</li>
+						<h1 style="text-align: inherit;">
+							{{lang["your_stored_music"]}}
+						</h1>
+						<li v-for="item, index in userSavedList" @click="PickSavedMusic(item.name)">{{item.label}}</li>
+					</ul>
+
+				</div>
+				<div class="box" style="border-left: 0.1vw;border-left-color: white;border-left-style: solid;">
+					<h1>
+						{{lang["tone_sound"]}}
+					</h1>
+					<ul>
+						<li v-for="item, index in pianoNotesType" :class="{ 'active-tone': item.enabled}" @click="ChangeNoteSound(item)">{{item.label}}</li>
+					</ul>
+				</div>
+				<div class="box" style="border-left: 0.1vw;border-left-color: white;border-left-style: solid;">
+					<h1>
+						{{lang["other_settings"]}}
+					</h1>
+					<ul>
+						<li @click="ChangeVolume()">{{lang["own_volume"]}}</li>
+						<li @click="RecordMusic()">{{lang["record_music"]}}</li>
+						<li v-if="!keybindSettings" @click="ChangeBindKeys()">{{lang["change_binds"]}}</li>
+						<li v-else @click="ChangeBindKeys()">{{lang["finish_binds"]}}</li>
+						<li @click="StopPlayBack()">{{lang["stop_playback"]}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script src="./scripts/Locales/LangSupport.js" type="text/javascript"></script>
+<script src="./scripts/Locales/en.js" type="text/javascript"></script>
+
+<script src="./scripts/CookieHandler.js" type="text/javascript"></script>
+
+<script src="./scripts/Variables/BlackKeys.js" type="text/javascript"></script>
+<script src="./scripts/Variables/PianoKeysForRender.js" type="text/javascript"></script>
+<script src="./scripts/Variables/WhiteKeys.js" type="text/javascript"></script>
+
+<script src="./scripts/other.js" type="text/javascript"></script>
+
+<script src="./scripts/VueJS/App.js" type="text/javascript"></script>
+<script src="./scripts/KeyEvent/KeyEvent.js" type="text/javascript"></script>
+<script src="./scripts/KeyEvent/InteractionWithKeys.js" type="text/javascript"></script>
+
+<script src="./scripts/listener.js" type="text/javascript"></script>
+</html>

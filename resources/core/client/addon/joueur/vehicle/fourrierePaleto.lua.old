@@ -1,0 +1,138 @@
+local token = nil
+TriggerEvent("core:RequestTokenAcces", "core", function(t)
+    token = t
+end)
+
+
+local open = false
+local main = RageUI.CreateMenu('', "Vehicule", 0.0, 0.0, "shopui_title_carmod", "shopui_title_carmod")
+local stock = {}
+
+main.onClosed = function()
+    open = false
+    RageUI.Visible(main, false)
+end
+
+local spawnCar = {
+    vector4(119.30187988281, 6618.9262695313, 31.408340454102, 140.82247924805),
+}
+
+function OpenFourrierePaleto()
+    if open then
+        open = false
+        RageUI.Visible(main, false)
+        return
+    else
+        open = true
+        RageUI.Visible(main, true)
+        stock = TriggerServerCallback("core:GetVehicles")
+        CreateThread(function()
+            while open do
+                RageUI.IsVisible(main, function()
+                    if stock ~= nil then
+                        RageUI.Separator("↓ Véhicule personnel ↓")
+                        for k, v in pairs(stock) do
+                            if v.stored > 1 and not v.job and not v.vente then
+                                RageUI.Button(string.upper(v.veh), false, {}, true, {
+                                    onSelected = function()
+                                        for key, value in pairs(spawnCar) do
+                                            if vehicle.IsSpawnPointClear(vector3(value.x, value.y, value.z), 3.0) then
+                                                local veh = vehicle.create(v.veh,
+                                                    value
+                                                    , v.props)
+                                                TaskWarpPedIntoVehicle(p:ped(), veh, -1)
+                                                TriggerServerEvent("core:SetVehicleOut",
+                                                    string.upper(vehicle.getPlate(veh))
+                                                    ,
+                                                    VehToNet(veh))
+                                                SetVehicleFuelLevel(veh,
+                                                    GetVehicleHandlingFloat(veh, "CHandlingData", "fPetrolTankVolume"))
+                                                RageUI.CloseAll()
+                                                return
+                                            end
+                                        end
+                                    end
+                                })
+
+                            end
+                        end
+                        RageUI.Separator("↓ Véhicule Job ↓")
+
+                        for k, v in pairs(stock) do
+                            if v.stored > 1 and v.job == p:getJob() then
+                                RageUI.Button(string.upper(v.veh), false, {}, true, {
+                                    onSelected = function()
+                                        for key, value in pairs(spawnCar) do
+                                            if vehicle.IsSpawnPointClear(vector3(value.x, value.y, value.z), 3.0) then
+                                                local veh = vehicle.create(v.veh,
+                                                    value
+                                                    , v.props)
+                                                TaskWarpPedIntoVehicle(p:ped(), veh, -1)
+                                                TriggerServerEvent("core:SetVehicleOut",
+                                                    string.upper(vehicle.getPlate(veh))
+                                                    ,
+                                                    VehToNet(veh))
+                                                SetVehicleFuelLevel(veh,
+                                                    GetVehicleHandlingFloat(veh, "CHandlingData", "fPetrolTankVolume"))
+                                                RageUI.CloseAll()
+                                                return
+                                            end
+                                        end
+                                    end
+                                })
+
+                            end
+                        end
+                        RageUI.Separator("↓ Véhicule Crew ↓")
+                        for k, v in pairs(stock) do
+                            if v.stored > 1 and v.vente == p:getCrew() then
+                                RageUI.Button(string.upper(v.veh), false, {}, true, {
+                                    onSelected = function()
+                                        for key, value in pairs(spawnCar) do
+                                            if vehicle.IsSpawnPointClear(vector3(value.x, value.y, value.z), 3.0) then
+                                                local veh = vehicle.create(v.veh,
+                                                    value
+                                                    , v.props)
+                                                TaskWarpPedIntoVehicle(p:ped(), veh, -1)
+                                                TriggerServerEvent("core:SetVehicleOut",
+                                                    string.upper(vehicle.getPlate(veh))
+                                                    ,
+                                                    VehToNet(veh))
+                                                SetVehicleFuelLevel(veh,
+                                                    GetVehicleHandlingFloat(veh, "CHandlingData", "fPetrolTankVolume"))
+                                                RageUI.CloseAll()
+                                                return
+                                            end
+                                        end
+                                    end
+                                })
+
+                            end
+                        end
+
+                    else
+                        RageUI.Separator("Aucun véhicule")
+                    end
+                end)
+                Wait(1)
+            end
+        end)
+    end
+end
+
+CreateThread(function()
+    while zone == nil do Wait(1) end
+    zone.addZone(
+        "fourrière" .. math.random(000000, 99999999), -- Nom
+        vector3(120.34503936768, 6625.791015625, 30.95396232605), -- Position
+        "Appuyer sur ~INPUT_CONTEXT~ pour ouvrir la fourrière", -- Text affiché
+        function() -- Action qui sera faite
+            OpenFourrierePaleto()
+        end,
+        true, -- Avoir un marker ou non
+        27, -- Id / type du marker
+        0.8, -- La taille
+        { 235, 192, 15 }, -- RGB
+        170-- Alpha
+    )
+end)

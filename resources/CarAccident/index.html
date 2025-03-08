@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CarAccident</title>
+
+    <script type="text/javascript">
+      window.addEventListener("message", function (event) {
+        var item = event.data;
+
+        if (item.sound && item.volume) {
+          document.getElementById(item.sound);
+          document.getElementById(item.sound).load();
+          document.getElementById(item.sound).volume = item.volume;
+          document.getElementById(item.sound).play();
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <audio id="accident_effect" src="accident_effect.ogg"></audio>
+  </body>
+</html>

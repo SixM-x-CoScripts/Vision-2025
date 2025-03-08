@@ -1,0 +1,49 @@
+{
+    "airplaneMode": false,
+    "streamerMode": false,
+    "doNotDisturb": false,
+    "name": "",
+    "display": {
+        "brightness": 1.0,
+        "size": 0.7,
+        "theme": "light",
+        "automatic": false
+    },
+    "security": {
+        "pinCode": false,
+        "faceId": false
+    },
+    "wallpaper": {
+        "background": "cloud8",
+        "blur": false
+    },
+    "time": {
+        "twelveHourClock": false
+    },
+    "sound": {
+        "volume": 0.5,
+        "ringtone": "default",
+        "texttone": "default",
+        "silent": false
+    },
+    "weather": {
+        "celcius": false
+    },
+    "notifications": {},
+    "storage": {
+        "used": 8576331,
+        "total": 128000000
+    },
+    "phone": {
+        "showCallerId": true
+    },
+    "lockscreen": {
+        "color": "gradient",
+        "fontStyle": 1,
+        "layout": 1
+    },
+    "apps": [
+        ["Phone", "Messages", "Camera", "Photos"],
+        ["Settings", "AppStore", "Clock", "Mail", "Weather", "Wallet", "Garage", "Home", "Maps", "Notes", "Calculator", "VoiceMemo", "Music", "Services"]
+    ]
+}

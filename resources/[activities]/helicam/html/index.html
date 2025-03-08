@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Helicam by Mads</title>
+	<link rel="stylesheet" href="style.css"/>	
+	<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+	<script src="./script.js" type="text/javascript"></script>
+</head>
+<body>
+	<div id="wrapper">
+	<div id="helicopter-info">
+		<div>
+			<div id="satellite-wrapper" class="inline"><img id="satellite-icon" class="svg" src="images/satellite-icon.svg"></div>
+			<p class="text inline" id="camera-label">FLIR SYSTEMS</p>
+		</div>
+		<div class="street"><p class="text street-text no-left-padding" id="hi-street">None</p></div>
+		<div id="hi-container-left">
+			<p class="text inline" id="hi-latitude">.</p>
+			<div class="relative">
+				<div id="hi-sub-ll" class="info-data">
+					<div><p class="text inline no-left-padding">SPD</p><p class="text inline float-right" id="hi-speed">0</p></div>
+					<p class="text inline no-left-padding">ALT</p><p class="text inline float-right" id="hi-altitude">0</p>
+				</div>
+				<div id="hi-sub-lr" class="info-data">
+					<p class="text" id="hi-speed-unit">KTS</p>
+					<p class="text" id="hi-altitude-unit">FT</p>
+				</div>
+			</div>
+		</div>
+		<div id="hi-container-right">
+			<p class="text inline" id="hi-longitude">.</p>
+			<div class="relative">
+				<div id="hi-sub-rl" class="info-data">
+					<p class="text inline">HDG</p><p class="text inline float-right" id="hi-heading">0</p>
+				</div>
+				<div id="hi-sub-rr" class="info-data">
+					<p class="text inline">°T</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="target-info">
+		<div><p class="text inline" id="mads-label">Made By Mads</p></div>
+		<div class="street" id="ta-street-wrapper"><p class="text street-text" id="ta-street">None</p></div>
+		<span id="ta-container-wrapper">
+			<div id="ta-container-left">
+				<p class="text inline" id="ta-latitude">.</p>
+				<div>
+					<div id="ta-sub-ll" class="info-data">
+						<div><p class="text inline">SPD</p><p class="text inline float-right" id="ta-speed">0</p></div>
+						<p class="text inline">ELV</p><p class="text inline float-right" id="ta-elevation">0</p>
+					</div>
+					<div id="ta-sub-lr" class="info-data">
+						<p class="text" id="ta-speed-unit">MPH</p>
+						<p class="text" id="ta-elevation-unit">FT</p>
+					</div>
+				</div>
+			</div>
+			<div id="ta-container-right">
+				<p class="text inline" id="ta-longitude">.</p>
+				<div>
+					<div id="ta-sub-rl" class="info-data">
+						<div><p class="text inline">HDG</p><p class="text inline float-right" id="ta-heading">0</p></div>
+						<p class="text inline">SLT</p><p class="text inline float-right" id="ta-distance">0</p>
+					</div>
+					<div id="ta-sub-rr" class="info-data">
+						<p class="text inline">°T</p>
+						<p id="ta-distance-unit" class="text inline">M</p>
+					</div>
+					<div id="numberplate-wrapper"><p class="text inline">LPL</p><p class="text inline float-right" id="ta-numberplate">---</p></div>
+				</div>
+			</div>
+		</span>
+	</div>
+
+	<div id="bearing-container">
+		<div class="bearing">
+			<p class="text inline" id="bearing-text">0°T</p>
+		</div>
+		<div id="bearing-arrow-container" class="bearing">
+			<img id="bearing-arrow" class="inline svg" src="images/arrow.svg">
+		</div>
+		<div class="bearing">
+			<!-- Modifed version of this: https://github.com/thelindat/compass/blob/master/html/index.html -->
+			<img id="bearing-img" class="svg" src="images/bearing.svg">
+			<img id="bearing-directions" src="images/bearing-directions.svg">
+		</div>
+	</div>
+
+	<div id="timedate-container">
+		<div><p class="text inline" id="date">21/08/22</p></div>
+		<div><p class="text inline" id="time">00:00:00 Z</p></div>
+	</div>
+
+	<div class="centered">
+		<span id="cross-wrapper">
+			<img id="target-cross" class="svg centered" src="images/target-cross.svg" alt="X">
+			<!-- <img id="target-cross-inner" class="svg centered" src="images/target-cross-inner.svg" alt="X"> --> <!-- To messy for my taste -->
+		</span>
+	</div>
+
+	<div id="lock-bar-container">
+		<p id="lock-bar-text" class="text">Scanning...</p>
+		<div id="lock-bar-wrapper">
+			<div id="lock-bar-progress"></div>
+		</div>
+	</div>
+
+	<div id="camera-info">
+		<div id="camera-info-stack">
+			<p id="vision-state" class="text">HDEO</p>
+			<p id="lock-state" class="text inline">LOCK</p><p id="lock-type" class="text inline">NONE</p>
+		</div>
+		<p class="text inline">W</p>
+		<span>
+			<img id="zoom-arrow" class="svg" src="images/arrow.svg">
+			<img id="zoom-bar" class="svg" src="images/zoom-bar.svg">
+		</span>
+		<p class="text inline">N</p>
+	</div>
+
+	<div id="relative-info">
+		<p class="text inline" id="camera-pitch">0°</p>
+		<div class="inline">
+			<img class="camera-img svg" src="images/camera-pitch.svg" alt="camera pitch">
+			<img id="pitch-line" class="camera-line svg" src="images/line.svg">
+		</div>
+		<div class="inline">
+			<img class="camera-img svg" src="images/camera-heading.svg" alt="camera heading">
+			<img id="heading-line" class="camera-line svg" src="images/line.svg">
+		</div>
+		<p id="camera-heading" class="text inline">0°</p>
+	</div>
+
+	<!-- <div id="north-infobox">
+		<div id="compass-arrow"></div>
+	</div> -->
+	</div>
+</body>
+</html>
