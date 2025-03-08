@@ -1,6 +1,6 @@
 # **Vision FiveM – Base Publique**
 
-Aujourd’hui, nous, les **fondateurs de SixM et CoScripts*, avons décidé de **publier intégralement la base du serveur Vision** pour mettre fin aux bases coûteuse.
+Aujourd’hui, nous, les *fondateurs de SixM et CoScripts*, avons décidé de **publier intégralement la base du serveur Vision** pour mettre fin aux bases coûteuse.
 ---
 
 ## 🔥 **Crédits – Les Vrais Boss du Projet**
