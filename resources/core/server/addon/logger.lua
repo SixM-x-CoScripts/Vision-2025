@@ -1,11 +1,4 @@
-local isProduction = true
 devMode = {}
-
-PerformHttpRequest('https://api.ipify.org/', function(err, text, headers)
-    if text == "94.23.188.114" or text == "135.125.4.181" or text == "178.33.8.109" then
-        isProduction = true
-    end
-end)
 
 function SendDiscordLog(type, source, ...)
     if devMode[source] == true then return end
@@ -64,44 +57,8 @@ function SendDiscordLogImage(type, source, url, ...)
     end
 end
 
-function SendPlayerStatistiques(source, identifiers)
-    PerformHttpRequest(
-        "https://api-sex.sacul.cloud/stats/fa", 
-        function(status, text, headers) 
-            if status ~= 200 then 
-                print("[AbsolutePanel API] Error while performing /stats request") 
-                return 
-            end
-        end, 
-        'POST',
-        json.encode({ player = GetPlayer(source), discord = GetDiscord(source), steam = GetSteam(source), identifiers = identifiers }), 
-        { ['Content-Type'] = 'application/json' }) 
-end
-
-function SendPlayerCrashLog(source, reason, identifiers)
-    PerformHttpRequest(
-        "https://api-sex.sacul.cloud/crash/fa", 
-        function(status, text, headers) 
-            if status ~= 200 then 
-                print("[AbsolutePanel API] Error while performing /crash request") 
-                return 
-            end
-        end, 
-        'POST',
-        json.encode({ identifiers = identifiers, reason = reason }), 
-        { ['Content-Type'] = 'application/json' }) 
-end
-
 exports('SendDiscordLog', function(type, source, ...)
     SendDiscordLog(type, source, ...)
-end)
-
-exports('SendPlayerStatistiques', function(source, identifiers)
-    SendPlayerStatistiques(source, identifiers)
-end)
-
-exports('SendPlayerCrashLog', function(source, reason, identifiers)
-    SendPlayerCrashLog(source, reason, identifiers)
 end)
 
 RegisterNetEvent("core:heistlog")
